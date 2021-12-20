@@ -8,15 +8,40 @@ import Button from '@mui/material/Button';
 export default function MainAppBar() {
   return (
     <Box>
-      <AppBar position='static' style={{ background: '#2E3B55' }}>
+      <AppBar
+        position='static'
+        elevation={0}
+        style={{ background: 'rgba(255,255,255,0)' }}
+      >
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <img src='healthcare.png' alt='logo' height='50' width='50' />
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              m: 1.2,
+            }}
+          >
+            <img src='healthcare.png' alt='logo' height='50' width='50' />
+            <Typography sx={{ fontSize: 10, color: 'black' }}>
+              Hospital Management
+            </Typography>
+          </Box>
+
           <Box sx={{ display: 'inline-flex' }}>
-            <Button color='inherit'>About</Button>
-            <Typography sx={{ padding: '6px 8px' }}>|</Typography>
-            <Button color='inherit'>Accounts</Button>
-            <Typography sx={{ padding: '6px 8px' }}>|</Typography>
-            <Button color='inherit'>Support</Button>
+            <Button sx={{ color: 'black' }}>About</Button>
+            <Typography sx={{ padding: '6px 8px', color: 'black' }}>
+              |
+            </Typography>
+            <Button sx={{ color: 'black' }} color='inherit'>
+              Accounts
+            </Button>
+            <Typography sx={{ padding: '6px 8px', color: 'black' }}>
+              |
+            </Typography>
+            <Button sx={{ color: 'black' }} color='inherit'>
+              Support
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
