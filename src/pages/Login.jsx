@@ -9,7 +9,7 @@ import {
   Button,
   Typography,
 } from '@mui/material';
-import MainAppBar from '../components/landingPage/MainAppBar';
+import MainAppBar from '../components/landingPage/LoginAppBar';
 
 let theme = createTheme({
   components: {
@@ -29,11 +29,12 @@ let theme = createTheme({
 });
 
 export default function Login() {
+  console.log(theme.mixins.toolbar);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <MainAppBar />
-      <Grid container sx={{ width: '100vw', height: '100vh' }}>
+      <Grid container sx={{ width: '100vw', height: '95vh' }}>
         <Grid
           item
           xs={7}
