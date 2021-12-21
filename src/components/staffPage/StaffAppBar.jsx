@@ -36,7 +36,7 @@ export default function StaffAppBar() {
                 m: 1.2,
               }}
             >
-              <img src='healthcare.png' alt='logo' height='50' width='50' />
+              <img src='healthcare.png' alt='logo' height='55' width='55' />
               <Typography sx={{ fontSize: 10, color: 'black' }}>
                 Hospital Management
               </Typography>

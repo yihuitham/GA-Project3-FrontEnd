@@ -45,7 +45,7 @@ export default function Login() {
           display: 'flex',
           height: '90vh',
           justifyContent: 'center',
-          alignItems: 'center',
+          mt: 1.5,
         }}
       >
         <Card
