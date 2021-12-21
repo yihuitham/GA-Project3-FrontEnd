@@ -37,7 +37,7 @@ export default function Login() {
       <Grid container sx={{ width: '100vw', height: '95vh' }}>
         <Grid
           item
-          xs={7}
+          xs={7.5}
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -53,7 +53,7 @@ export default function Login() {
         </Grid>
         <Grid
           item
-          xs={5}
+          xs={4.5}
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -62,7 +62,7 @@ export default function Login() {
           <Box
             component='form'
             sx={{
-              marginTop: -18,
+              marginTop: -20,
               p: 3,
               pb: 1,
               borderRadius: 2.5,
@@ -78,7 +78,6 @@ export default function Login() {
               sx={{
                 mb: 2,
                 fontFamily: 'DM Sans, sans-serif',
-                fontSize: 72,
                 textAlign: 'center',
               }}
             >
