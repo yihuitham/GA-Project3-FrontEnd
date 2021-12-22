@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   TextField,
@@ -8,21 +8,21 @@ import {
   Grid,
   Button,
   Typography,
+  Paper,
 } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import StaffAppBar from '../components/staffPage/StaffAppBar';
-import { MuiPickersUtilsProvider, Calendar } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import idLocale from 'date-fns/locale/id';
-import Paper from '@mui/material/Paper';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import CalendarPicker from '@mui/lab/CalendarPicker';
+import { makeStyles } from '@mui/styles';
 
 let theme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          // apply theme's border-radius instead of component's default
           backgroundImage: 'radial-gradient(#FFFFFF, #5EB2FC)',
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed',
@@ -32,10 +32,17 @@ let theme = createTheme({
       },
     },
   },
+  palette: {
+    primary: {
+      main: '#B9DDFE',
+      dark: '#B9DDFE',
+    },
+  },
 });
 
 export default function Login() {
   console.log(theme.mixins.toolbar);
+  const [date, setDate] = useState(new Date());
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -52,14 +59,102 @@ export default function Login() {
           elevation={10}
           sx={{ width: '95vw', height: '85vh', borderRadius: 5 }}
         >
-          <CardContent>
-            // still trying to fix the calender component
-            {/* <MuiPickersUtilsProvider utils={DateFnsUtils} locale={idLocale}>
-              <Paper style={{ overflow: 'hidden' }}>
-                <Calendar />
-              </Paper>
-            </MuiPickersUtilsProvider> */}
-          </CardContent>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Grid
+              container
+              sx={{
+                display: 'flex',
+                alignContent: 'center',
+                // justifyContent: 'center',
+                width: '95vw',
+                height: '85vh',
+              }}
+            >
+              <Grid
+                item
+                sx={{
+                  m: 3,
+                  borderRadius: 5,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <CalendarPicker
+                  date={date}
+                  onChange={(newDate) => setDate(newDate)}
+                  color='secondary'
+                />
+              </Grid>
+              <Grid
+                item
+                sx={{
+                  m: 3,
+                  borderRadius: 5,
+                  flexGrow: 1,
+                  bgcolor: '#ededed',
+                }}
+              >
+                <Paper sx={{ m: 2, p: 2, maxHeight: '75vh', overflow: 'auto' }}>
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                  Operation details go here
+                  <br />
+                </Paper>
+              </Grid>
+            </Grid>
+          </LocalizationProvider>
         </Card>
       </Box>
     </ThemeProvider>
