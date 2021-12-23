@@ -5,6 +5,7 @@ import FormInput from '../components/loginForm/formInput';
 // import { AuthContext } from '../context/AuthContext';
 import { publicFetch } from './../util/fetch';
 import { Navigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 import {
   Box,
@@ -41,8 +42,8 @@ const LoginSchema = Yup.object().shape({
 });
 
 export default function Login() {
-  console.log(theme.mixins.toolbar);
-  // const authContext = useContext(AuthContext);
+  // console.log(theme.mixins.toolbar);
+  const authContext = useContext(AuthContext);
   const [loginSuccess, setLoginSuccess] = useState();
   const [loginError, setLoginError] = useState();
   const [redirectOnLogin, setRedirectOnLogin] = useState(false);
@@ -54,7 +55,7 @@ export default function Login() {
       const { data } = await publicFetch.post(`authenticate`, credentials);
       console.log(data);
 
-      // authContext.setAuthState(data);
+      authContext.setAuthState(data);
       setLoginSuccess(data.message);
       setLoginError('');
       setTimeout(() => {
@@ -70,7 +71,13 @@ export default function Login() {
 
   return (
     <>
-      {redirectOnLogin && <Navigate to='/dashboard' replace={true} />}
+      {redirectOnLogin && !authContext.isAdmin() && (
+        <Navigate to='/dashboard' replace={true} />
+      )}
+      {redirectOnLogin && authContext.isAdmin() && (
+        <Navigate to='/chief' replace={true} />
+      )}
+
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <MainAppBar />
