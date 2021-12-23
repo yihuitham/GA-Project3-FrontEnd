@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -18,6 +19,8 @@ let theme = createTheme({
 });
 
 export default function StaffAppBar() {
+  const auth = useContext(AuthContext);
+  const { authState } = auth;
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -72,13 +75,24 @@ export default function StaffAppBar() {
                   variant='subtitle1'
                   sx={{ m: 0, p: 0, marginBlockEnd: -0.5, color: '#353839' }}
                 >
-                  Dr Sheena
+                  Dr. {authState.userInfo.name}
                 </Typography>
                 <Typography variant='caption' sx={{ color: '#353839' }}>
-                  Neurosurgeon
+                  {authState.userInfo.speciality[0]}
                 </Typography>
               </Box>
             </Box>
+            <Button
+              onClick={auth.logout}
+              variant='contained'
+              sx={{
+                m: 1,
+                backgroundColor: '#355576',
+                fontWeight: 'bold',
+              }}
+            >
+              Logout
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>
