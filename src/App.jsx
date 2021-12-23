@@ -1,16 +1,32 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import StaffDashboard from './pages/StaffDashboard';
+import { AuthProvider, AuthContext } from './context/AuthContext';
+import { FetchProvider } from './context/FetchContext';
 
-function App() {
+const AppRoutes = () => {
   return (
-    <BrowserRouter>
+    <>
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/dashboard' element={<StaffDashboard />} />
       </Routes>
-    </BrowserRouter>
+    </>
+  );
+};
+
+function App() {
+  return (
+    <Router>
+      <AuthProvider>
+        <FetchProvider>
+          <div>
+            <AppRoutes />
+          </div>
+        </FetchProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 
