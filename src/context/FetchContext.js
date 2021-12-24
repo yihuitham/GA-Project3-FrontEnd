@@ -12,8 +12,11 @@ const FetchProvider = ({ children }) => {
     baseURL: process.env.REACT_APP_API_URL,
   });
 
+  // use HTTP interceptors that come with axios
+  // then set up config callback which going to allow us to work with headers
   authAxios.interceptors.request.use(
     (config) => {
+      //The JSON Web Token is on AuthContext in AuthState. Before we call for the token itself, we need to put in this scheme called bearer. This is because the tools that we are going to use on the API expect this scheme to be in place.
       config.headers.Authorization = `Bearer ${authContext.authState.token}`;
       return config;
     },
