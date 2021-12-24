@@ -7,9 +7,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Chip from '@mui/material/Chip';
-import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
 import FaceIcon from '@mui/icons-material/Face';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 let theme = createTheme({
   typography: {
@@ -66,12 +66,12 @@ export default function StaffAppBar() {
               sx={{
                 boxShadow: 7,
                 bgcolor: '#B9DDFE',
-                width: 200,
-                height: 60,
                 borderRadius: 30,
                 display: 'flex',
                 alignItems: 'center',
-                p: 2,
+                p: 1,
+                pl: 2,
+                pr: 2,
               }}
             >
               <FaceIcon fontSize='large' sx={{ color: '#353839' }} />
@@ -81,6 +81,7 @@ export default function StaffAppBar() {
                   flexDirection: 'column',
                   alignContent: 'center',
                   pl: 2,
+                  pr: 1,
                 }}
               >
                 <Typography
@@ -93,18 +94,10 @@ export default function StaffAppBar() {
                   {authState.userInfo.speciality}
                 </Typography>
               </Box>
+              <IconButton onClick={auth.logout}>
+                <LogoutIcon />
+              </IconButton>
             </Box>
-            <Button
-              onClick={auth.logout}
-              variant='contained'
-              sx={{
-                m: 1,
-                backgroundColor: '#355576',
-                fontWeight: 'bold',
-              }}
-            >
-              Logout
-            </Button>
           </Toolbar>
         </AppBar>
       </Box>
