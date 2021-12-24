@@ -21,6 +21,18 @@ let theme = createTheme({
 export default function StaffAppBar() {
   const auth = useContext(AuthContext);
   const { authState } = auth;
+  const role = authState.userInfo.role;
+  let title;
+  switch (role) {
+    case 'Doctor':
+      title = 'Dr.';
+      break;
+    case 'Nurse':
+      title = 'Nurse';
+      break;
+    case 'Chief':
+      title = 'Chief';
+  }
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -75,10 +87,10 @@ export default function StaffAppBar() {
                   variant='subtitle1'
                   sx={{ m: 0, p: 0, marginBlockEnd: -0.5, color: '#353839' }}
                 >
-                  Dr. {authState.userInfo.name}
+                  {title} {authState.userInfo.name}
                 </Typography>
                 <Typography variant='caption' sx={{ color: '#353839' }}>
-                  {authState.userInfo.speciality[0]}
+                  {authState.userInfo.speciality}
                 </Typography>
               </Box>
             </Box>

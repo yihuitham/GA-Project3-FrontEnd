@@ -40,7 +40,7 @@ let theme = createTheme({
   },
 });
 
-export default function Login() {
+export default function StaffDashboard() {
   console.log(theme.mixins.toolbar);
   const [date, setDate] = useState(new Date());
   return (
