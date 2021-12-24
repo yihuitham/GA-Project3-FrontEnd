@@ -11,12 +11,10 @@ import {
   Paper,
 } from '@mui/material';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import StaffAppBar from '../components/staffPage/StaffAppBar';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import CalendarPicker from '@mui/lab/CalendarPicker';
-import { makeStyles } from '@mui/styles';
+import ChiefMenu from '../components/ChiefMenu';
 
 let theme = createTheme({
   components: {
@@ -32,16 +30,16 @@ let theme = createTheme({
       },
     },
   },
-  palette: {
-    primary: {
-      main: '#B9DDFE',
-      dark: '#B9DDFE',
-    },
-  },
+  //   palette: {
+  //     primary: {
+  //       main: '#B9DDFE',
+  //       dark: '#B9DDFE',
+  //     },
+  //   },
 });
 
 export default function ChiefDashboard() {
-  const [date, setDate] = useState(new Date());
+  const [selectedComponent, setSelectedComponent] = useState('schedule');
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -63,34 +61,28 @@ export default function ChiefDashboard() {
               container
               sx={{
                 display: 'flex',
-                alignContent: 'center',
-                // justifyContent: 'center',
                 width: '95vw',
                 height: '85vh',
               }}
             >
               <Grid
                 item
+                xs={2}
                 sx={{
-                  m: 3,
-                  borderRadius: 5,
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              ></Grid>
-              <Grid
-                item
-                sx={{
-                  m: 3,
-                  borderRadius: 5,
-                  flexGrow: 1,
-                  bgcolor: '#ededed',
+                  borderRight: 1,
+                  p: 1,
                 }}
               >
-                <Paper
-                  sx={{ m: 2, p: 2, maxHeight: '75vh', overflow: 'auto' }}
-                ></Paper>
+                <ChiefMenu setSelectedComponent={setSelectedComponent} />
               </Grid>
+              <Grid
+                item
+                xs={10}
+                sx={{
+                  borderRadius: 5,
+                  bgcolor: '#ededed',
+                }}
+              ></Grid>
             </Grid>
           </LocalizationProvider>
         </Card>
