@@ -14,7 +14,10 @@ import Card from '@mui/material/Card';
 import StaffAppBar from '../components/staffPage/StaffAppBar';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import ChiefMenu from '../components/ChiefMenu';
+import ChiefMenuList from '../components/ChiefMenuList';
+import ScheduleOverview from '../components/ScheduleOverview';
+import PatientOverview from '../components/PatientOverview';
+import StaffOverview from '../components/StaffOverview';
 
 let theme = createTheme({
   components: {
@@ -30,16 +33,12 @@ let theme = createTheme({
       },
     },
   },
-  //   palette: {
-  //     primary: {
-  //       main: '#B9DDFE',
-  //       dark: '#B9DDFE',
-  //     },
-  //   },
 });
 
 export default function ChiefDashboard() {
   const [selectedComponent, setSelectedComponent] = useState('schedule');
+  console.log(selectedComponent);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -73,7 +72,7 @@ export default function ChiefDashboard() {
                   p: 1,
                 }}
               >
-                <ChiefMenu setSelectedComponent={setSelectedComponent} />
+                <ChiefMenuList setSelectedComponent={setSelectedComponent} />
               </Grid>
               <Grid
                 item
@@ -82,7 +81,11 @@ export default function ChiefDashboard() {
                   borderRadius: 5,
                   bgcolor: '#ededed',
                 }}
-              ></Grid>
+              >
+                {selectedComponent == 'schedule' && <ScheduleOverview />}
+                {selectedComponent == 'staff' && <StaffOverview />}
+                {selectedComponent == 'patient' && <PatientOverview />}
+              </Grid>
             </Grid>
           </LocalizationProvider>
         </Card>

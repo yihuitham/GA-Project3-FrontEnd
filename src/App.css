@@ -1,3 +1,7 @@
 body {
   background-image: radial-gradient(white, #5eb2fc);
 }
+
+.MuiListItemButton-root {
+  color: red;
+}
