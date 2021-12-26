@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   Box,
   TextField,
@@ -17,6 +17,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import CalendarPicker from '@mui/lab/CalendarPicker';
 import { makeStyles } from '@mui/styles';
+import { FetchContext } from '../context/FetchContext';
 
 let theme = createTheme({
   components: {
@@ -42,6 +43,25 @@ let theme = createTheme({
 
 export default function StaffDashboard() {
   console.log(theme.mixins.toolbar);
+  const fetchContext = useContext(FetchContext);
+  const [staffDashboardData, setStaffDashboardData] = useState();
+
+  useEffect(() => {
+    const getStaffDashboardData = async () => {
+      try {
+        const { data } = await fetchContext.authAxios.get(
+          'staff/dashboard-data'
+        );
+        setStaffDashboardData(data);
+        console.log('staff-data:', staffDashboardData);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getStaffDashboardData();
+  }, [fetchContext]);
+
   const [date, setDate] = useState(new Date());
   return (
     <ThemeProvider theme={theme}>
