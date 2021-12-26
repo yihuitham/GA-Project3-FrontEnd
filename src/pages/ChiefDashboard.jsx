@@ -64,22 +64,17 @@ export default function ChiefDashboard() {
                 height: '85vh',
               }}
             >
-              <Grid
-                item
-                xs={2}
-                sx={{
-                  borderRight: 1,
-                  p: 1,
-                }}
-              >
+              <Grid item xs={2}>
                 <ChiefMenuList setSelectedComponent={setSelectedComponent} />
               </Grid>
               <Grid
                 item
                 xs={10}
                 sx={{
-                  borderRadius: 5,
-                  bgcolor: '#ededed',
+                  bgcolor: '#f0f0f0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 {selectedComponent == 'schedule' && <ScheduleOverview />}

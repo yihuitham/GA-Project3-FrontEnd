@@ -52,7 +52,7 @@ export default function Login() {
   const submitCredentials = async (credentials) => {
     try {
       setLoginLoading(true);
-      const { data } = await publicFetch.post(`authenticate`, credentials);
+      const { data } = await publicFetch.post(`api/authenticate`, credentials);
       console.log(data);
 
       authContext.setAuthState(data);
