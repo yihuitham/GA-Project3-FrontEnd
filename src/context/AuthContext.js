@@ -52,6 +52,8 @@ const AuthProvider = ({ children }) => {
     return authState.userInfo.role === 'Chief';
   };
 
+  console.log('this is authcontext');
+
   return (
     <Provider
       value={{
