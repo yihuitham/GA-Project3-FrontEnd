@@ -49,9 +49,7 @@ export default function StaffDashboard() {
   useEffect(() => {
     const getStaffDashboardData = async () => {
       try {
-        const { data } = await fetchContext.authAxios.get(
-          'staff/dashboard-data'
-        );
+        const { data } = await fetchContext.authAxios.get('staff/');
         setStaffDashboardData(data);
         console.log('staff-data:', staffDashboardData);
       } catch (err) {

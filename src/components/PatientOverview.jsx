@@ -27,7 +27,7 @@ export default function PatientOverview() {
   useEffect(async () => {
     const getPatientData = async () => {
       try {
-        const response = await publicFetch.get(`api/patient/all`);
+        const response = await publicFetch.get(`patient/all`);
         setpatientData(response.data);
         console.log(patientData);
       } catch (error) {
