@@ -77,102 +77,102 @@ export default function StaffDashboard() {
           elevation={10}
           sx={{ width: '95vw', height: '85vh', borderRadius: 5 }}
         >
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <Grid
+            container
+            sx={{
+              display: 'flex',
+              alignContent: 'center',
+              // justifyContent: 'center',
+              width: '95vw',
+              height: '85vh',
+            }}
+          >
             <Grid
-              container
+              item
               sx={{
+                m: 3,
+                borderRadius: 5,
                 display: 'flex',
-                alignContent: 'center',
-                // justifyContent: 'center',
-                width: '95vw',
-                height: '85vh',
+                alignItems: 'center',
               }}
             >
-              <Grid
-                item
-                sx={{
-                  m: 3,
-                  borderRadius: 5,
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <CalendarPicker
                   date={date}
                   onChange={(newDate) => setDate(newDate)}
                   color='secondary'
                 />
-              </Grid>
-              <Grid
-                item
-                sx={{
-                  m: 3,
-                  borderRadius: 5,
-                  flexGrow: 1,
-                  bgcolor: '#ededed',
-                }}
-              >
-                <Paper sx={{ m: 2, p: 2, maxHeight: '75vh', overflow: 'auto' }}>
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                  Operation details go here
-                  <br />
-                </Paper>
-              </Grid>
+              </LocalizationProvider>
             </Grid>
-          </LocalizationProvider>
+            <Grid
+              item
+              sx={{
+                m: 3,
+                borderRadius: 5,
+                flexGrow: 1,
+                bgcolor: '#ededed',
+              }}
+            >
+              <Paper sx={{ m: 2, p: 2, maxHeight: '75vh', overflow: 'auto' }}>
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+                Operation details go here
+                <br />
+              </Paper>
+            </Grid>
+          </Grid>
         </Card>
       </Box>
     </ThemeProvider>

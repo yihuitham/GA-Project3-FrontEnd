@@ -29,13 +29,14 @@ export default function PatientOverview() {
       try {
         const response = await publicFetch.get(`patient/all`);
         setpatientData(response.data);
-        console.log(patientData);
       } catch (error) {
         console.log(error);
       }
     };
     getPatientData();
   }, []);
+  console.log('Patient', patientData);
+
   return (
     <Paper
       sx={{
