@@ -55,12 +55,12 @@ export default function Login() {
       const { data } = await publicFetch.post(`authenticate`, credentials);
       console.log(data);
 
-      authContext.setAuthState(data);
-      setLoginSuccess(data.message);
+      // authContext.setAuthState(data);
+      // setLoginSuccess(data.message);
       setLoginError('');
       setTimeout(() => {
         setRedirectOnLogin(true);
-      }, 700);
+      });
     } catch (error) {
       setLoginLoading(false);
       const { data } = error.response;

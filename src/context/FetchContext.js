@@ -11,7 +11,7 @@ const FetchProvider = ({ children }) => {
 
   const authAxios = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
-  });
+  }); //use publicFetch
 
   // use HTTP interceptors that come with axios
   // then set up config callback which going to allow us to work with headers
