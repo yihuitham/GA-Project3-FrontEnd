@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import StaffAppBar from '../components/staffPage/StaffAppBar';
+import StaffAppBar from '../components/StaffAppBar';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import CalendarPicker from '@mui/lab/CalendarPicker';
