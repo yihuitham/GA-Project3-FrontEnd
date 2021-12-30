@@ -7,7 +7,7 @@ const { Provider } = FetchContext;
 
 const FetchProvider = ({ children }) => {
   const authContext = useContext(AuthContext);
-  console.log('authstate token:', authContext.authState.token);
+  // console.log('authstate token:', authContext.authState.token);
 
   const authAxios = axios.create({
     baseURL: process.env.REACT_APP_API_URL,

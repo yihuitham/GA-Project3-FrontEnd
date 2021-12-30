@@ -5,63 +5,84 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { ActionAreaCard } from './OperationRoomCard';
+import Grid from '@mui/material/Grid';
+import { Box } from '@mui/system';
+import { Paper } from '@mui/material';
 
 export default function ScheduleOverview() {
-  const [scheduleData, setScheduleData] = useState([]);
-  const [OR1, setOR1] = useState({});
-  const [OR2, setOR2] = useState({});
-  const [OR3, setOR3] = useState({});
-  const [OR4, setOR4] = useState({});
-  const [OR5, setOR5] = useState({});
+  const [operation, setOperation] = useState([]);
+  let operationRes = [];
+
   const [date, setDate] = useState(new Date());
   const [ddmmyy, setDDMMYY] = useState(
     `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
   );
-  const testDate = (newDate) => {
+  const changeDate = (newDate) => {
     setDate(newDate);
     const newDDMMYY = `${newDate.getDate()}-${
       newDate.getMonth() + 1
     }-${newDate.getFullYear()}`;
     setDDMMYY(newDDMMYY);
-    const OR1Data = async () => {
+    getOperationData(newDDMMYY);
+  };
+  const getOperationData = async (date) => {
+    // for (let i = 0; i < 8; i++) {
+    //   operationRes.push([i, date]);
+    //   console.log(operationRes);
+    // }
+
+    for (let i = 1; i < 9; i++) {
       try {
-        const response = await publicFetch.get(`operation/1/${newDDMMYY}`);
-        setOR1(response.data);
+        const res = await publicFetch.get(`operation/${i}/${date}`);
+        operationRes.push(res.data);
+        console.log(res.data);
       } catch (error) {
+        operationRes.push({ operatingRoom: i });
         console.log(error);
       }
-    };
-    OR1Data();
+    }
+    setOperation(operationRes);
+    console.log(operationRes);
   };
   useEffect(async () => {
-    const OR1Data = async () => {
-      try {
-        const response = await publicFetch.get(`operation/1/${ddmmyy}`);
-        setOR1(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    OR1Data();
-  }, [ddmmyy]);
+    getOperationData(ddmmyy);
+  }, []);
   console.log('Date', date);
   console.log('ddmmyy', ddmmyy);
-  console.log('Operation Room 1', OR1);
+  console.log('Operation Data', operation);
 
   return (
-    <>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DesktopDatePicker
-          label='Date'
-          inputFormat='dd/MM/yyyy'
-          value={date}
-          onChange={(newDate) => testDate(newDate)}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </LocalizationProvider>
-      <Typography>
-        {Object.keys(OR1).length === 0 ? '-' : OR1.surgeonID.name}
-      </Typography>
-    </>
+    <Paper
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        m: 2,
+        maxHeight: '85vh',
+        overflow: 'auto',
+      }}
+    >
+      <Box sx={{ mt: 2 }}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DesktopDatePicker
+            label='Date'
+            inputFormat='dd/MM/yyyy'
+            value={date}
+            onChange={(newDate) => changeDate(newDate)}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+      </Box>
+      <Grid container spacing={2} sx={{ p: 2 }}>
+        {operation.map((op, index) => {
+          return (
+            <Grid item xs={3} key={index}>
+              <ActionAreaCard op={op} />
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Paper>
   );
 }

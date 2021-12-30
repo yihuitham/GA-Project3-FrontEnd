@@ -52,12 +52,20 @@ export default function PatientOverview() {
         <Table stickyHeader aria-label='patient table'>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>NRIC</TableCell>
-              <TableCell align='center'>Gender</TableCell>
-              <TableCell align='center'>Age</TableCell>
-              <TableCell align='center'>Blood Type</TableCell>
-              <TableCell>Medical Condition</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Name</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>NRIC</TableCell>
+              <TableCell align='center' sx={{ fontWeight: 'bold' }}>
+                Gender
+              </TableCell>
+              <TableCell align='center' sx={{ fontWeight: 'bold' }}>
+                Age
+              </TableCell>
+              <TableCell align='center' sx={{ fontWeight: 'bold' }}>
+                Blood Type
+              </TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>
+                Medical Condition
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
     return authState.userInfo.role === 'Chief';
   };
 
-  console.log('this is authcontext', authState);
+  // console.log('this is authcontext', authState);
 
   return (
     <Provider

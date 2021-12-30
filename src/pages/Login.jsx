@@ -53,7 +53,7 @@ export default function Login() {
     try {
       setLoginLoading(true);
       const { data } = await publicFetch.post(`authenticate`, credentials);
-      console.log(data);
+      // console.log(data);
 
       authContext.setAuthState(data); // bug here
       // setLoginSuccess(data.message);
