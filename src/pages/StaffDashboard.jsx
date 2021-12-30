@@ -18,6 +18,10 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import CalendarPicker from '@mui/lab/CalendarPicker';
 import { makeStyles } from '@mui/styles';
 import { FetchContext } from '../context/FetchContext';
+import { AuthContext } from '../context/AuthContext';
+import OperationDetails from '../components/OperationDetails';
+import PatientDetails from '../components/PatientDetails';
+import { publicFetch } from '../util/fetch';
 
 let theme = createTheme({
   components: {
@@ -42,9 +46,35 @@ let theme = createTheme({
 });
 
 export default function StaffDashboard() {
-  console.log(theme.mixins.toolbar);
+  // console.log(theme.mixins.toolbar);
+  const authContext = useContext(AuthContext);
   const fetchContext = useContext(FetchContext);
+  const [date, setDate] = useState(new Date());
+  const [ddmmyy, setDDMMYY] = useState(
+    `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
+  );
   const [staffDashboardData, setStaffDashboardData] = useState();
+  const [operationData, setOperationData] = useState();
+
+  const changeDate = (newDate) => {
+    setDate(newDate);
+    const newDDMMYY = `${newDate.getDate()}-${
+      newDate.getMonth() + 1
+    }-${newDate.getFullYear()}`;
+    setDDMMYY(newDDMMYY);
+
+    const fetchAPI = async () => {
+      try {
+        const response = await publicFetch.get(
+          `operation/search/${authContext.authState.userInfo._id}/${newDDMMYY}`
+        );
+        setOperationData(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAPI();
+  };
 
   useEffect(() => {
     const getStaffDashboardData = async () => {
@@ -57,10 +87,21 @@ export default function StaffDashboard() {
       }
     };
 
-    getStaffDashboardData();
-  }, [fetchContext]);
+    const getOperationData = async () => {
+      try {
+        const response = await publicFetch.get(
+          `operation/search/${authContext.authState.userInfo._id}/${ddmmyy}`
+        );
+        setOperationData(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  const [date, setDate] = useState(new Date());
+    getStaffDashboardData();
+    getOperationData();
+  }, [fetchContext, ddmmyy]);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -99,7 +140,7 @@ export default function StaffDashboard() {
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <CalendarPicker
                   date={date}
-                  onChange={(newDate) => setDate(newDate)}
+                  onChange={(newDate) => changeDate(newDate)}
                   color='secondary'
                 />
               </LocalizationProvider>
@@ -114,62 +155,30 @@ export default function StaffDashboard() {
               }}
             >
               <Paper sx={{ m: 2, p: 2, maxHeight: '75vh', overflow: 'auto' }}>
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
-                Operation details go here
-                <br />
+                <Grid
+                  item
+                  xs={10}
+                  sx={{
+                    bgcolor: '#f0f0f0',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {console.log('operation data', operationData)}
+                  {operationData === undefined ||
+                  operationData.data.message === 'Not found' ? (
+                    '-'
+                  ) : (
+                    <OperationDetails />
+                  )}
+                  {operationData === undefined ||
+                  operationData.data.message === 'Not found' ? (
+                    '-'
+                  ) : (
+                    <PatientDetails />
+                  )}
+                </Grid>
               </Paper>
             </Grid>
           </Grid>
