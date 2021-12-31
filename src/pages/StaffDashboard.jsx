@@ -165,12 +165,15 @@ export default function StaffDashboard() {
                     justifyContent: 'center',
                   }}
                 >
-                  {console.log('operation data', operationData)}
+                  {console.log(
+                    'operation data from staffdashboard',
+                    operationData
+                  )}
                   {operationData === undefined ||
                   operationData.data.message === 'Not found' ? (
                     '-'
                   ) : (
-                    <OperationDetails />
+                    <OperationDetails operationData={operationData} />
                   )}
                   {operationData === undefined ||
                   operationData.data.message === 'Not found' ? (
