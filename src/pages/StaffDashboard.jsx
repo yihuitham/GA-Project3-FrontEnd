@@ -66,7 +66,7 @@ export default function StaffDashboard() {
     const fetchAPI = async () => {
       try {
         const response = await publicFetch.get(
-          `operation/search/${authContext.authState.userInfo._id}/${newDDMMYY}`
+          `operation/search/${authContext.authState.userInfo.role}/${authContext.authState.userInfo._id}/${newDDMMYY}`
         );
         setOperationData(response);
       } catch (error) {
@@ -90,7 +90,7 @@ export default function StaffDashboard() {
     const getOperationData = async () => {
       try {
         const response = await publicFetch.get(
-          `operation/search/${authContext.authState.userInfo._id}/${ddmmyy}`
+          `operation/search/${authContext.authState.userInfo.role}/${authContext.authState.userInfo._id}/${ddmmyy}`
         );
         setOperationData(response);
       } catch (error) {
