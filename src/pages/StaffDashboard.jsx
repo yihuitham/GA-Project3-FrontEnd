@@ -179,7 +179,7 @@ export default function StaffDashboard() {
                   operationData.data.message === 'Not found' ? (
                     '-'
                   ) : (
-                    <PatientDetails />
+                    <PatientDetails operationData={operationData} />
                   )}
                 </Grid>
               </Paper>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   TextField,
@@ -17,7 +17,22 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
-export default function PatientDetails() {
+export default function PatientDetails(props) {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setData(props.operationData.data.patientID);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getData();
+    console.log('patient data', data);
+  }, [props]);
+
   return (
     <Paper
       sx={{
@@ -40,34 +55,44 @@ export default function PatientDetails() {
           }}
         >
           <TableRow>
-            <TableCell align='center'> Operation Details </TableCell>
-            <TableCell align='left'>Operation Theatre </TableCell>
-            <TableCell align='left'> 1 </TableCell>
+            <TableCell align='center'> Patient Details </TableCell>
+            <TableCell align='left'>Name</TableCell>
+            <TableCell align='left'>
+              {data === null ? ' ' : data.name}
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell align='center'> </TableCell>
-            <TableCell align='left'>Operation Date </TableCell>
-            <TableCell align='left'> 5 January 2022 </TableCell>
+            <TableCell align='left'>Identification Number</TableCell>
+            <TableCell align='left'>
+              {data === null ? ' ' : data.nric}
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell align='center'> </TableCell>
-            <TableCell align='left'>Operation Time </TableCell>
-            <TableCell align='left'> 14:00 </TableCell>
+            <TableCell align='left'>Age</TableCell>
+            <TableCell align='left'>{data === null ? ' ' : data.age}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell align='center'> </TableCell>
-            <TableCell align='left'>Operation Description </TableCell>
-            <TableCell align='left'> Heart Surgery </TableCell>
+            <TableCell align='left'>Blood Type</TableCell>
+            <TableCell align='left'>
+              {data === null ? ' ' : data.bloodType}
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell align='center'> </TableCell>
-            <TableCell align='left'>Surgeon </TableCell>
-            <TableCell align='left'> Wei Lun </TableCell>
+            <TableCell align='left'>Medical Allergies</TableCell>
+            <TableCell align='left'>
+              {data === null ? ' ' : data.allergy}
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell align='center'> </TableCell>
-            <TableCell align='left'>Nurses </TableCell>
-            <TableCell align='left'> Siew La </TableCell>
+            <TableCell align='left'>Medical Condition</TableCell>
+            <TableCell align='left'>
+              {data === null ? ' ' : data.medicalCondition}
+            </TableCell>
           </TableRow>
         </Table>
       </TableContainer>
