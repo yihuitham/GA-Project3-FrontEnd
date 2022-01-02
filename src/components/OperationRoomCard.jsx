@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Grid } from '@mui/material';
 import { Box } from '@mui/system';
@@ -9,8 +8,20 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Modal from '@mui/material/Modal';
+import { styled } from '@mui/styles';
+import ViewOperation from './ViewOperation';
+import EditIcon from '@mui/icons-material/Edit';
+import IconButton from '@mui/material/IconButton';
+import Fab from '@mui/material/Fab';
+
+const tableStyle = { p: 0, color: '#3A3B3C' };
+
+const CardTableCell = styled(TableCell)({
+  padding: 0,
+  color: '#3A3B3C',
+});
 
 function Content(info) {
   return (
@@ -18,9 +29,7 @@ function Content(info) {
       <Box
         sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
-        <Typography variant='subtitle1' sx={{ color: 'lightblack' }}>
-          {info.operation}
-        </Typography>
+        <Typography variant='body1'>{info.operation}</Typography>
 
         <TableContainer sx={{ mt: 1 }}>
           <Table>
@@ -28,28 +37,22 @@ function Content(info) {
               <TableRow
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell sx={{ p: 0 }} variant='caption'>
-                  Patient:
-                </TableCell>
-                <TableCell sx={{ p: 0 }} variant='caption' align='center'>
+                <CardTableCell variant='footer'>Patient:</CardTableCell>
+                <CardTableCell variant='footer' align='center'>
                   {info.patientID.name}
-                </TableCell>
+                </CardTableCell>
               </TableRow>
               <TableRow>
-                <TableCell sx={{ p: 0 }} variant='caption'>
-                  Surgeon:
-                </TableCell>
-                <TableCell sx={{ p: 0 }} variant='caption' align='center'>
+                <CardTableCell variant='footer'>Surgeon:</CardTableCell>
+                <CardTableCell variant='footer' align='center'>
                   {info.surgeonID.name}
-                </TableCell>
+                </CardTableCell>
               </TableRow>
               <TableRow>
-                <TableCell sx={{ p: 0 }} variant='caption'>
-                  Nurses:
-                </TableCell>
-                <TableCell sx={{ p: 0 }} variant='caption' align='center'>
+                <CardTableCell variant='footer'>Nurses:</CardTableCell>
+                <CardTableCell variant='footer' align='center'>
                   {info.nursesID[0].name}, ..
-                </TableCell>
+                </CardTableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -58,26 +61,58 @@ function Content(info) {
     </>
   );
 }
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '76vw',
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  borderRadius: 2,
+  pt: 2,
+  pb: 2,
+};
 
-function ActionAreaCard({ op }) {
+function OperationRoomCard({ op }) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardContent
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            height: '255px',
-            pl: '10px',
-            pr: '10px',
-          }}
-        >
-          <Typography>Operating Room</Typography>
-          <Typography variant='h2' sx={{ m: 2 }}>
-            {op.operatingRoom}
-          </Typography>
-          <Typography variant='body2' color='text.secondary'>
+    <>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box sx={modalStyle}>
+          <ViewOperation operationData={op} />
+          <Fab
+            size='medium'
+            aria-label='edit'
+            sx={{ position: 'absolute', bottom: 0, right: 0, m: 2 }}
+          >
+            <EditIcon />
+          </Fab>
+        </Box>
+      </Modal>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea onClick={handleOpen}>
+          <CardContent
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              height: '255px',
+              pl: '10px',
+              pr: '10px',
+            }}
+          >
+            <Typography>Operating Room</Typography>
+            <Typography variant='h2' sx={{ m: 2 }}>
+              {op.operatingRoom}
+            </Typography>
             {op._id ? (
               Content(op)
             ) : (
@@ -96,11 +131,11 @@ function ActionAreaCard({ op }) {
                 Available
               </Typography>
             )}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </>
   );
 }
 
-export { ActionAreaCard };
+export { OperationRoomCard };

@@ -5,7 +5,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { ActionAreaCard } from './OperationRoomCard';
+import { OperationRoomCard } from './OperationRoomCard';
 import Grid from '@mui/material/Grid';
 import { Box } from '@mui/system';
 import { Paper } from '@mui/material';
@@ -78,7 +78,7 @@ export default function ScheduleOverview() {
         {operation.map((op, index) => {
           return (
             <Grid item xs={3} key={index}>
-              <ActionAreaCard op={op} />
+              <OperationRoomCard op={op} />
             </Grid>
           );
         })}
