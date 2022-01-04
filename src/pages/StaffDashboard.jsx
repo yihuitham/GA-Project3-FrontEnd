@@ -19,8 +19,8 @@ import CalendarPicker from '@mui/lab/CalendarPicker';
 import { makeStyles } from '@mui/styles';
 import { FetchContext } from '../context/FetchContext';
 import { AuthContext } from '../context/AuthContext';
-import OperationDetails from '../components/OperationDetails';
-import PatientDetails from '../components/PatientDetails';
+import ViewOperation from '../components/ViewOperation';
+import ViewPatient from '../components/ViewPatient';
 import { publicFetch } from '../util/fetch';
 
 let theme = createTheme({
@@ -173,13 +173,13 @@ export default function StaffDashboard() {
                   operationData.data.message === 'Not found' ? (
                     '-'
                   ) : (
-                    <OperationDetails operationData={operationData} />
+                    <ViewOperation operationData={operationData.data} />
                   )}
                   {operationData === undefined ||
                   operationData.data.message === 'Not found' ? (
                     '-'
                   ) : (
-                    <PatientDetails operationData={operationData} />
+                    <ViewPatient operationData={operationData.data.patientID} />
                   )}
                 </Grid>
               </Paper>
