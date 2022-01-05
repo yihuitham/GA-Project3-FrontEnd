@@ -14,6 +14,8 @@ import Table from '@mui/material/Table';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
+import EditIcon from '@mui/icons-material/Edit';
+import Fab from '@mui/material/Fab';
 
 export default function ViewOperation({ operationData }) {
   const data = operationData;
@@ -55,8 +57,7 @@ export default function ViewOperation({ operationData }) {
               sx={{ color: '#4682B4', fontWeight: '600' }}
               align='center'
             >
-              {' '}
-              Operation Details{' '}
+              Operation Details
             </TableCell>
             <TableCell align='left'>Operation Theatre </TableCell>
             <TableCell align='left'>
@@ -98,6 +99,13 @@ export default function ViewOperation({ operationData }) {
           </TableRow>
         </Table>
       </TableContainer>
+      <Fab
+        size='medium'
+        aria-label='edit'
+        sx={{ position: 'absolute', bottom: 0, right: 0, m: 2 }}
+      >
+        <EditIcon />
+      </Fab>
     </Paper>
   );
 }

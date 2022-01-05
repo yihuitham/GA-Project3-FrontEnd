@@ -12,9 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/styles';
 import ViewOperation from './ViewOperation';
-import EditIcon from '@mui/icons-material/Edit';
-import IconButton from '@mui/material/IconButton';
-import Fab from '@mui/material/Fab';
+import NewOperation from './NewOperation';
 
 const tableStyle = { p: 0, color: '#3A3B3C' };
 
@@ -70,11 +68,10 @@ const modalStyle = {
   bgcolor: 'background.paper',
   boxShadow: 24,
   borderRadius: 2,
-  pt: 2,
-  pb: 2,
+  p: 2,
 };
 
-function OperationRoomCard({ op }) {
+function OperationRoomCard({ op, date }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -87,14 +84,11 @@ function OperationRoomCard({ op }) {
         aria-describedby='modal-modal-description'
       >
         <Box sx={modalStyle}>
-          <ViewOperation operationData={op} />
-          <Fab
-            size='medium'
-            aria-label='edit'
-            sx={{ position: 'absolute', bottom: 0, right: 0, m: 2 }}
-          >
-            <EditIcon />
-          </Fab>
+          {op._id ? (
+            <ViewOperation operationData={op} />
+          ) : (
+            <NewOperation operationData={op} date={date} />
+          )}
         </Box>
       </Modal>
       <Card sx={{ maxWidth: 345 }}>

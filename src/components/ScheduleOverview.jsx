@@ -78,7 +78,7 @@ export default function ScheduleOverview() {
         {operation.map((op, index) => {
           return (
             <Grid item xs={3} key={index}>
-              <OperationRoomCard op={op} />
+              <OperationRoomCard op={op} date={ddmmyy} />
             </Grid>
           );
         })}
