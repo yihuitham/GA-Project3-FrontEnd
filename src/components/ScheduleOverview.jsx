@@ -59,7 +59,7 @@ export default function ScheduleOverview() {
         flexDirection: 'column',
         alignItems: 'center',
         m: 2,
-        maxHeight: '85vh',
+        maxHeight: '80vh',
         overflow: 'auto',
       }}
     >

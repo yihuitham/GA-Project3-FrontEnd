@@ -42,10 +42,9 @@ export default function PatientOverview() {
       sx={{
         maxHeight: '80vh',
         overflow: 'auto',
-        maxWidth: '76vw',
         display: 'flex',
         flex: 1,
-        m: 1,
+        m: 2,
       }}
     >
       <TableContainer>
