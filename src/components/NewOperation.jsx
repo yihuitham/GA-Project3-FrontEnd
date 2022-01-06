@@ -17,6 +17,8 @@ import TableRow from '@mui/material/TableRow';
 import SaveIcon from '@mui/icons-material/Save';
 import Fab from '@mui/material/Fab';
 import TimePicker24hr from './TimePicker24hr';
+import Nursestags from './NursesTags';
+import SurgeonsTags from './SurgeonsTags';
 
 export default function NewOperation({ operationData, date }) {
   const data = operationData;
@@ -66,34 +68,35 @@ export default function NewOperation({ operationData, date }) {
           </TableRow>
           <TableRow>
             <TableCell align='center'> </TableCell>
-            <TableCell align='left'>Operation Time </TableCell>
+            <TableCell align='left'>{`Operation Time (24hr)`} </TableCell>
             <TableCell align='left'>
-              <Box sx={{ mt: 1 }}>
-                <TimePicker24hr />
-              </Box>
+              <TimePicker24hr />
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell align='center'> </TableCell>
             <TableCell align='left'>Operation Description </TableCell>
             <TableCell align='left'>
-              <TextField size='small' variant='outlined' />
+              <TextField
+                inputProps={{ style: { fontSize: 14 } }}
+                size='small'
+                variant='standard'
+                sx={{ width: 350 }}
+              />
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell align='center'> </TableCell>
             <TableCell align='left'>Surgeon </TableCell>
             <TableCell align='left'>
-              {' '}
-              <TextField size='small' variant='outlined' />
+              <SurgeonsTags />
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell align='center'> </TableCell>
             <TableCell align='left'>Nurses </TableCell>
             <TableCell align='left'>
-              {' '}
-              <TextField size='small' variant='outlined' />
+              <Nursestags />
             </TableCell>
           </TableRow>
         </Table>
