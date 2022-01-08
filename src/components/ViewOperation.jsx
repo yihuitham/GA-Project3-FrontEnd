@@ -9,6 +9,7 @@ import {
   Button,
   Typography,
   Paper,
+  TableBody,
 } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -52,51 +53,53 @@ export default function ViewOperation({ operationData }) {
             },
           }}
         >
-          <TableRow>
-            <TableCell
-              sx={{ color: '#4682B4', fontWeight: '600' }}
-              align='center'
-            >
-              Operation Details
-            </TableCell>
-            <TableCell align='left'>Operation Theatre </TableCell>
-            <TableCell align='left'>
-              {data === null ? ' ' : data.operatingRoom}
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align='center'> </TableCell>
-            <TableCell align='left'>Operation Date </TableCell>
-            <TableCell align='left'>
-              {data === null ? ' ' : data.date}
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align='center'> </TableCell>
-            <TableCell align='left'>Operation Time </TableCell>
-            <TableCell align='left'>
-              {data === null ? ' ' : data.time}
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align='center'> </TableCell>
-            <TableCell align='left'>Operation Description </TableCell>
-            <TableCell align='left'>
-              {data === null ? ' ' : data.operation}
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align='center'> </TableCell>
-            <TableCell align='left'>Surgeon </TableCell>
-            <TableCell align='left'>
-              {data === null ? ' ' : data.surgeonID.name}
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align='center'> </TableCell>
-            <TableCell align='left'>Nurses </TableCell>
-            <TableCell align='left'>{data === null ? ' ' : nurses}</TableCell>
-          </TableRow>
+          <TableBody>
+            <TableRow>
+              <TableCell
+                sx={{ color: '#4682B4', fontWeight: '600' }}
+                align='center'
+              >
+                Operation Details
+              </TableCell>
+              <TableCell align='left'>Operation Theatre </TableCell>
+              <TableCell align='left'>
+                {data === null ? ' ' : data.operatingRoom}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align='center'> </TableCell>
+              <TableCell align='left'>Operation Date </TableCell>
+              <TableCell align='left'>
+                {data === null ? ' ' : data.date}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align='center'> </TableCell>
+              <TableCell align='left'>Operation Time </TableCell>
+              <TableCell align='left'>
+                {data === null ? ' ' : data.time}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align='center'> </TableCell>
+              <TableCell align='left'>Operation Description </TableCell>
+              <TableCell align='left'>
+                {data === null ? ' ' : data.operation}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align='center'> </TableCell>
+              <TableCell align='left'>Surgeon </TableCell>
+              <TableCell align='left'>
+                {data === null ? ' ' : data.surgeonID.name}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align='center'> </TableCell>
+              <TableCell align='left'>Nurses </TableCell>
+              <TableCell align='left'>{data === null ? ' ' : nurses}</TableCell>
+            </TableRow>
+          </TableBody>
         </Table>
       </TableContainer>
       <Fab
