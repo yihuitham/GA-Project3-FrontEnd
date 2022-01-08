@@ -13,7 +13,7 @@ import {
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import StaffAppBar from '../components/StaffAppBar';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import AdapterMoment from '@mui/lab/AdapterMoment';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import CalendarPicker from '@mui/lab/CalendarPicker';
 import { makeStyles } from '@mui/styles';
@@ -138,7 +138,7 @@ export default function StaffDashboard() {
                 alignItems: 'center',
               }}
             >
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <LocalizationProvider dateAdapter={AdapterMoment}>
                 <CalendarPicker
                   date={date}
                   onChange={(newDate) => changeDate(newDate)}

@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import Card from '@mui/material/Card';
 import StaffAppBar from '../components/StaffAppBar';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import AdapterMoment from '@mui/lab/AdapterMoment';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import ChiefMenuList from '../components/ChiefMenuList';
 import ScheduleOverview from '../components/ScheduleOverview';
@@ -72,7 +72,7 @@ export default function ChiefDashboard() {
           elevation={10}
           sx={{ width: '95vw', height: '85vh', borderRadius: 5 }}
         >
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
             <Grid
               container
               sx={{
