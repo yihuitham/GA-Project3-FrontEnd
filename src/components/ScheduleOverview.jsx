@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { publicFetch } from '../util/fetch';
+import React, { useContext, useState, useEffect } from 'react';
+import { FetchContext } from '../context/FetchContext';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
@@ -11,6 +11,7 @@ import { Box } from '@mui/system';
 import { Paper } from '@mui/material';
 
 export default function ScheduleOverview() {
+  const fetchContext = useContext(FetchContext);
   const [operation, setOperation] = useState([]);
   let operationRes = [];
 
@@ -34,7 +35,7 @@ export default function ScheduleOverview() {
 
     for (let i = 1; i < 9; i++) {
       try {
-        const res = await publicFetch.get(`operation/${i}/${date}`);
+        const res = await fetchContext.authAxios.get(`operation/${i}/${date}`);
         operationRes.push(res.data);
         console.log(res.data);
       } catch (error) {
