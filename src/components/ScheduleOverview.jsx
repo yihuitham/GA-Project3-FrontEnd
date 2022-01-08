@@ -68,7 +68,7 @@ export default function ScheduleOverview() {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DesktopDatePicker
             label='Date'
-            inputFormat='DD/MM/YYYY'
+            inputFormat='dd/MM/yyyy'
             value={date}
             onChange={(newDate) => changeDate(newDate)}
             renderInput={(params) => <TextField {...params} />}
