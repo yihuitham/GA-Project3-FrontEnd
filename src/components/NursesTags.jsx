@@ -13,26 +13,26 @@ const checkedIcon = <CheckBoxIcon fontSize='small' />;
 const handleChange = (values) => {};
 
 export default function Nursestags() {
-  //   const [nurses, setNurses] = useState([]);
-  //   useEffect(() => {
-  //     const getData = async () => {
-  //       try {
-  //         const res = await publicFetch.get(`staff/nurses`);
-  //         setNurses(res.data);
-  //         console.log(res.data);
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     };
-  //     getData();
-  //   }, []);
+  // const [nurses, setNurses] = useState([]);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const res = await publicFetch.get(`staff/all`);
+  //       setNurses(res.data);
+  //       console.log('staff/all', res.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getData();
+  // }, []);
 
-  const handleChange = (values) => {
-    const IDs = values.map((value) => {
-      return value.id;
-    });
-    console.log(IDs);
-  };
+  // const handleChange = (values) => {
+  //   const IDs = values.map((value) => {
+  //     return value.id;
+  //   });
+  //   console.log(IDs);
+  // };
 
   return (
     <Autocomplete

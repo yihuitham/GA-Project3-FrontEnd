@@ -23,12 +23,12 @@ import EditIcon from '@mui/icons-material/Edit';
 // };
 
 export default function PatientOverview() {
-  const [patientData, setpatientData] = useState([]);
+  const [patientData, setPatientData] = useState([]);
   useEffect(async () => {
     const getPatientData = async () => {
       try {
         const response = await publicFetch.get(`patient/all`);
-        setpatientData(response.data);
+        setPatientData(response.data);
       } catch (error) {
         console.log(error);
       }
