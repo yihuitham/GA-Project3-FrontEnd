@@ -1,45 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import { publicFetch } from '../util/fetch';
 import { Typography } from '@mui/material';
-
+import { FetchContext } from '../context/FetchContext';
 const icon = <CheckBoxOutlineBlankIcon fontSize='small' />;
 const checkedIcon = <CheckBoxIcon fontSize='small' />;
 
-const handleChange = (values) => {};
+export default function Nursestags({ selectedNurses, setSelectedNurses }) {
+  const fetchContext = useContext(FetchContext);
+  const [nurses, setNurses] = useState([]);
 
-export default function Nursestags() {
-  // const [nurses, setNurses] = useState([]);
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const res = await publicFetch.get(`staff/all`);
-  //       setNurses(res.data);
-  //       console.log('staff/all', res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await fetchContext.authAxios.get(`staff/nurses`);
+        const nurses = res.data.sort(function (a, b) {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        });
+        setNurses(nurses);
+        console.log('staff/nurses', res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getData();
+  }, []);
 
-  // const handleChange = (values) => {
-  //   const IDs = values.map((value) => {
-  //     return value.id;
-  //   });
-  //   console.log(IDs);
-  // };
-
+  const handleChange = (values) => {
+    const IDs = values.map((value) => {
+      return value._id;
+    });
+    console.log(IDs);
+    setSelectedNurses(IDs);
+  };
+  console.log('selected nurses', selectedNurses);
   return (
     <Autocomplete
       multiple
       id='checkboxes-tags-demo'
       options={nurses}
       disableCloseOnSelect
+      autoHighlight
       onChange={(event, value) => handleChange(value)}
       getOptionLabel={(option) => option.name}
       renderOption={(props, option, { selected }) => (
@@ -58,9 +68,3 @@ export default function Nursestags() {
     />
   );
 }
-
-const nurses = [
-  { name: 'lea', id: 123 },
-  { name: 'siewla', id: 456 },
-  { name: 'arianne', id: 789 },
-];

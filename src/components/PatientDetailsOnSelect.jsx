@@ -15,8 +15,8 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 
-export default function PatientDetailsOnSelect({ patient }) {
-  const data = patient;
+export default function PatientDetailsOnSelect({ selectedPatient }) {
+  const data = selectedPatient;
 
   return (
     <>

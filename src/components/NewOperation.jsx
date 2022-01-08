@@ -13,6 +13,7 @@ import {
 import Table from '@mui/material/Table';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
+import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import SaveIcon from '@mui/icons-material/Save';
 import Fab from '@mui/material/Fab';
@@ -24,8 +25,10 @@ import PatientDetailsOnSelect from './PatientDetailsOnSelect';
 
 export default function NewOperation({ operationData, date }) {
   const data = operationData;
-  const [patient, setPatient] = useState({});
-  console.log('setPatient', patient);
+  const [selectedSurgeons, setSelectedSurgeons] = useState([]);
+  const [selectedNurses, setSelectedNurses] = useState([]);
+  const [selectedPatient, setSelectedPatient] = useState(null);
+
   return (
     <Paper
       sx={{
@@ -52,61 +55,72 @@ export default function NewOperation({ operationData, date }) {
             },
           }}
         >
-          <TableRow>
-            <TableCell sx={{ color: '#4682B4', fontWeight: '600' }}>
-              Operation Details
-            </TableCell>
-            <TableCell>Operation Theatre </TableCell>
-            <TableCell>{data === null ? ' ' : data.operatingRoom}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align='center'> </TableCell>
-            <TableCell>Operation Date </TableCell>
-            <TableCell>{date}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align='center'> </TableCell>
-            <TableCell>{`Operation Time (24hr)`} </TableCell>
-            <TableCell>
-              <TimePicker24hr />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align='center'> </TableCell>
-            <TableCell>Operation Description </TableCell>
-            <TableCell>
-              <TextField
-                inputProps={{ style: { fontSize: 14 } }}
-                size='small'
-                variant='standard'
-                sx={{ width: 350 }}
-              />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align='center'> </TableCell>
-            <TableCell>Surgeon </TableCell>
-            <TableCell>
-              <SurgeonsTags />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align='center'> </TableCell>
-            <TableCell>Nurses </TableCell>
-            <TableCell>
-              <Nursestags />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell sx={{ color: '#4682B4', fontWeight: '600' }}>
-              Patient Details
-            </TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>
-              <PatientAutocomplete setPatient={setPatient} />
-            </TableCell>
-          </TableRow>
-          <PatientDetailsOnSelect patient={patient} />
+          <TableBody>
+            <TableRow>
+              <TableCell sx={{ color: '#4682B4', fontWeight: '600' }}>
+                Operation Details
+              </TableCell>
+              <TableCell>Operation Theatre </TableCell>
+              <TableCell>{data === null ? ' ' : data.operatingRoom}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align='center'> </TableCell>
+              <TableCell>Operation Date </TableCell>
+              <TableCell>{date}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align='center'> </TableCell>
+              <TableCell>{`Operation Time (24hr format)`} </TableCell>
+              <TableCell>
+                <TimePicker24hr />
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align='center'> </TableCell>
+              <TableCell>Operation Description </TableCell>
+              <TableCell>
+                <TextField
+                  inputProps={{ style: { fontSize: 14 } }}
+                  size='small'
+                  variant='standard'
+                  sx={{ width: 350 }}
+                />
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align='center'> </TableCell>
+              <TableCell>Surgeon </TableCell>
+              <TableCell>
+                <SurgeonsTags
+                  selectedSurgeons={selectedSurgeons}
+                  setSelectedSurgeons={setSelectedSurgeons}
+                />
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align='center'> </TableCell>
+              <TableCell>Nurses </TableCell>
+              <TableCell>
+                <Nursestags
+                  selectedNurses={selectedNurses}
+                  setSelectedNurses={setSelectedNurses}
+                />
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell sx={{ color: '#4682B4', fontWeight: '600' }}>
+                Patient Details
+              </TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>
+                <PatientAutocomplete
+                  selectedPatient={selectedPatient}
+                  setSelectedPatient={setSelectedPatient}
+                />
+              </TableCell>
+            </TableRow>
+            <PatientDetailsOnSelect selectedPatient={selectedPatient} />
+          </TableBody>
         </Table>
       </TableContainer>
       <Fab

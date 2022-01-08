@@ -1,16 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { publicFetch } from '../util/fetch';
+import { FetchContext } from '../context/FetchContext';
 
-export default function PatientAutocomplete({ setPatient }) {
+export default function PatientAutocomplete({
+  selectedPatient,
+  setSelectedPatient,
+}) {
+  const fetchContext = useContext(FetchContext);
   const [patients, setPatients] = useState([]);
 
   useEffect(async () => {
     const getData = async () => {
       try {
-        const response = await publicFetch.get(`patient/all`);
-        setPatients(response.data);
+        const response = await fetchContext.authAxios.get(`patient/all`);
+        const patients = response.data.sort(function (a, b) {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        });
+        setPatients(patients);
         console.log(response.data);
       } catch (error) {
         console.log(error);
@@ -25,8 +38,9 @@ export default function PatientAutocomplete({ setPatient }) {
       getOptionLabel={(option) => option.name}
       id='auto-complete'
       autoComplete
+      autoHighlight
       onChange={(e, value) => {
-        setPatient(value);
+        setSelectedPatient(value);
       }}
       renderInput={(params) => (
         <TextField {...params} variant='standard' style={{ width: 350 }} />
