@@ -87,7 +87,11 @@ function OperationRoomCard({ op, date }) {
           {op._id ? (
             <ViewOperation operationData={op} />
           ) : (
-            <NewOperation operationData={op} date={date} />
+            <NewOperation
+              operationData={op}
+              date={date}
+              handleClose={handleClose}
+            />
           )}
         </Box>
       </Modal>

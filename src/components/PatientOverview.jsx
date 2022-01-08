@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { publicFetch } from './../util/fetch';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,25 +9,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import EditIcon from '@mui/icons-material/Edit';
-
-// get patient data with axios
-// const getPatientData = async () => {
-//   try {
-//     const response = await publicFetch.get(`api/patient/all`);
-//     patientData = await response.data;
-//     console.log(patientData);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+import { FetchContext } from '../context/FetchContext';
 
 export default function PatientOverview() {
   const [patientData, setPatientData] = useState([]);
+  const fetchContext = useContext(FetchContext);
+
   useEffect(async () => {
     const getPatientData = async () => {
       try {
-        const response = await publicFetch.get(`patient/all`);
+        const response = await fetchContext.authAxios.get(`patient/all`);
         setPatientData(response.data);
       } catch (error) {
         console.log(error);

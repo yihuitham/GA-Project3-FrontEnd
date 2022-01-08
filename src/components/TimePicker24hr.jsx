@@ -4,9 +4,8 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import TimePicker from '@mui/lab/TimePicker';
 
-export default function TimePicker24hr() {
+export default function TimePicker24hr({ setTime }) {
   const [value, setValue] = useState(null);
-
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <TimePicker
@@ -17,7 +16,7 @@ export default function TimePicker24hr() {
         mask='__:__'
         value={value}
         onChange={(newValue) => {
-          setValue(newValue);
+          setTime(newValue.getTime());
         }}
         renderInput={(params) => (
           <TextField {...params} variant='standard' sx={{ width: 43 }} />

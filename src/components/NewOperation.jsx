@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Box,
   TextField,
@@ -22,12 +22,37 @@ import Nursestags from './NursesTags';
 import SurgeonsTags from './SurgeonsTags';
 import PatientAutocomplete from './PatientAutocomplete';
 import PatientDetailsOnSelect from './PatientDetailsOnSelect';
+import { FetchContext } from '../context/FetchContext';
 
-export default function NewOperation({ operationData, date }) {
+export default function NewOperation({ operationData, date, handleClose }) {
   const data = operationData;
+  const fetchContext = useContext(FetchContext);
   const [selectedSurgeons, setSelectedSurgeons] = useState([]);
   const [selectedNurses, setSelectedNurses] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState(null);
+  const [time, setTime] = useState(null);
+  const [operationName, setOperationName] = useState(null);
+
+  const createNewOperation = async () => {
+    try {
+      const response = await fetchContext.authAxios.post('/operation', {
+        operatingRoom: data.operatingRoom,
+        operation: operationName,
+        surgeonID: selectedSurgeons,
+        nursesID: selectedNurses,
+        patientID: selectedPatient._id,
+        date: date,
+        time: time,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = () => {
+    createNewOperation();
+    handleClose();
+  };
 
   return (
     <Paper
@@ -72,7 +97,7 @@ export default function NewOperation({ operationData, date }) {
               <TableCell align='center'> </TableCell>
               <TableCell>{`Operation Time (24hr format)`} </TableCell>
               <TableCell>
-                <TimePicker24hr />
+                <TimePicker24hr setTime={setTime} />
               </TableCell>
             </TableRow>
             <TableRow>
@@ -84,6 +109,10 @@ export default function NewOperation({ operationData, date }) {
                   size='small'
                   variant='standard'
                   sx={{ width: 350 }}
+                  onChange={(e) => {
+                    setOperationName(e.target.value);
+                    // console.log(operationName);
+                  }}
                 />
               </TableCell>
             </TableRow>
@@ -126,7 +155,7 @@ export default function NewOperation({ operationData, date }) {
       <Fab
         size='medium'
         aria-label='edit'
-        // onClick={handleSubmit}
+        onClick={handleSubmit}
         sx={{ position: 'absolute', bottom: 0, right: 0, m: 2 }}
       >
         <SaveIcon fontSize='medium' />

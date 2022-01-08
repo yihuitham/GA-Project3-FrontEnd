@@ -28,11 +28,6 @@ export default function ScheduleOverview() {
     getOperationData(newDDMMYY);
   };
   const getOperationData = async (date) => {
-    // for (let i = 0; i < 8; i++) {
-    //   operationRes.push([i, date]);
-    //   console.log(operationRes);
-    // }
-
     for (let i = 1; i < 9; i++) {
       try {
         const res = await fetchContext.authAxios.get(`operation/${i}/${date}`);
