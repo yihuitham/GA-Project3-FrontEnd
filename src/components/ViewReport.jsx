@@ -1,23 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { FetchContext } from '../context/FetchContext';
 
 export default function FormPropsTextFields({ operationData }) {
   const data = operationData;
+  const fetchContext = useContext(FetchContext);
 
   const [editButton, setEditButton] = useState(true);
   const [saveButton, setSaveButton] = useState(false);
   const [button, setButton] = useState(true);
+  const [input, setInput] = useState('');
+  const [report, setReport] = useState({
+    report1: '',
+  });
 
   const handleClick = () => {
     if (button) {
       setButton(false);
     } else {
       setButton(true);
+      updateReportAPI();
     }
   };
 
+  const updateReportAPI = async () => {
+    try {
+      const response = await fetchContext.authAxios.post(
+        `operation/updateReport/${data.operatingRoom}/${data.date}`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    setReport({ ...report, report1: input });
+  }, [input]);
+
+  console.log(report);
   return (
     <Box
       component='form'
@@ -30,11 +52,11 @@ export default function FormPropsTextFields({ operationData }) {
       {button ? (
         <div>
           <TextField
-            id='filled-read-only-input'
+            id='read'
             label=''
             multiline
             maxRows={4}
-            defaultValue={data}
+            defaultValue={data.postOpReport}
             InputProps={{
               readOnly: true,
             }}
@@ -44,15 +66,16 @@ export default function FormPropsTextFields({ operationData }) {
       ) : (
         <div>
           <TextField
-            id='filled-read-only-input'
+            id='input'
             label=''
             multiline
             maxRows={4}
-            defaultValue={data}
+            defaultValue={data.postOpReport}
             InputProps={{
               readOnly: false,
             }}
             variant='filled'
+            onChange={(e) => setInput(e.target.value)}
           />
         </div>
       )}

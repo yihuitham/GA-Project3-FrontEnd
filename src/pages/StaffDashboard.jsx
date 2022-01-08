@@ -93,7 +93,7 @@ export default function StaffDashboard() {
         const response = await fetchContext.authAxios.get(
           `operation/search/${authContext.authState.userInfo.role}/${authContext.authState.userInfo._id}/${ddmmyy}`
         );
-        setOperationData(response);
+        setOperationData(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -171,24 +171,22 @@ export default function StaffDashboard() {
                     operationData
                   )}
                   {operationData === undefined ||
-                  operationData.data.message === 'Not found' ? (
+                  operationData.message === 'Not found' ? (
                     '-'
                   ) : (
-                    <ViewOperation operationData={operationData.data} />
+                    <ViewOperation operationData={operationData} />
                   )}
                   {operationData === undefined ||
-                  operationData.data.message === 'Not found' ? (
+                  operationData.message === 'Not found' ? (
                     '-'
                   ) : (
-                    <ViewPatient operationData={operationData.data.patientID} />
+                    <ViewPatient operationData={operationData.patientID} />
                   )}
                   {operationData === undefined ||
-                  operationData.data.message === 'Not found' ? (
+                  operationData.message === 'Not found' ? (
                     '-'
                   ) : (
-                    <ViewReport
-                      operationData={operationData.data.postOpReport}
-                    />
+                    <ViewReport operationData={operationData} />
                   )}
                 </Grid>
               </Paper>
