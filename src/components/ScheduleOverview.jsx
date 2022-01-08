@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { FetchContext } from '../context/FetchContext';
-import AdapterMoment from '@mui/lab/AdapterMoment';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
@@ -65,10 +65,10 @@ export default function ScheduleOverview() {
       }}
     >
       <Box sx={{ mt: 2 }}>
-        <LocalizationProvider dateAdapter={AdapterMoment}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DesktopDatePicker
             label='Date'
-            inputFormat='dd/MM/yyyy'
+            inputFormat='DD/MM/YYYY'
             value={date}
             onChange={(newDate) => changeDate(newDate)}
             renderInput={(params) => <TextField {...params} />}
