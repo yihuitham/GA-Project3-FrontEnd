@@ -12,9 +12,7 @@ export default function FormPropsTextFields({ operationData }) {
   const [saveButton, setSaveButton] = useState(false);
   const [button, setButton] = useState(true);
   const [input, setInput] = useState('');
-  const [report, setReport] = useState({
-    report1: '',
-  });
+  const [report, setReport] = useState('');
 
   const handleClick = () => {
     if (button) {
@@ -27,8 +25,9 @@ export default function FormPropsTextFields({ operationData }) {
 
   const updateReportAPI = async () => {
     try {
-      const response = await fetchContext.authAxios.post(
-        `operation/updateReport/${data.operatingRoom}/${data.date}`
+      const response = await fetchContext.authAxios.patch(
+        `operation/updateReport/${data.operatingRoom}/${data.date}`,
+        { report }
       );
     } catch (error) {
       console.log(error);
@@ -36,7 +35,7 @@ export default function FormPropsTextFields({ operationData }) {
   };
 
   useEffect(() => {
-    setReport({ ...report, report1: input });
+    setReport(input);
   }, [input]);
 
   console.log(report);
