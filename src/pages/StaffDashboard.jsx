@@ -21,6 +21,7 @@ import { FetchContext } from '../context/FetchContext';
 import { AuthContext } from '../context/AuthContext';
 import ViewOperation from '../components/ViewOperation';
 import ViewPatient from '../components/ViewPatient';
+import ViewReport from '../components/ViewReport';
 import { publicFetch } from '../util/fetch';
 
 let theme = createTheme({
@@ -63,17 +64,17 @@ export default function StaffDashboard() {
     }-${newDate.getFullYear()}`;
     setDDMMYY(newDDMMYY);
 
-    const fetchAPI = async () => {
-      try {
-        const response = await publicFetch.get(
-          `operation/search/${authContext.authState.userInfo.role}/${authContext.authState.userInfo._id}/${newDDMMYY}`
-        );
-        setOperationData(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchAPI();
+    // const fetchAPI = async () => {
+    //   try {
+    //     const response = await publicFetch.get(
+    //       `operation/search/${authContext.authState.userInfo.role}/${authContext.authState.userInfo._id}/${newDDMMYY}`
+    //     );
+    //     setOperationData(response);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    // fetchAPI();
   };
 
   useEffect(() => {
@@ -89,7 +90,7 @@ export default function StaffDashboard() {
 
     const getOperationData = async () => {
       try {
-        const response = await publicFetch.get(
+        const response = await fetchContext.authAxios.get(
           `operation/search/${authContext.authState.userInfo.role}/${authContext.authState.userInfo._id}/${ddmmyy}`
         );
         setOperationData(response);
@@ -180,6 +181,14 @@ export default function StaffDashboard() {
                     '-'
                   ) : (
                     <ViewPatient operationData={operationData.data.patientID} />
+                  )}
+                  {operationData === undefined ||
+                  operationData.data.message === 'Not found' ? (
+                    '-'
+                  ) : (
+                    <ViewReport
+                      operationData={operationData.data.postOpReport}
+                    />
                   )}
                 </Grid>
               </Paper>

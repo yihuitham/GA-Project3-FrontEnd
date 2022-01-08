@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   Box,
   TextField,
@@ -18,6 +18,8 @@ import ChiefMenuList from '../components/ChiefMenuList';
 import ScheduleOverview from '../components/ScheduleOverview';
 import PatientOverview from '../components/PatientOverview';
 import StaffOverview from '../components/StaffOverview';
+import { FetchContext } from '../context/FetchContext';
+import { AuthContext } from '../context/AuthContext';
 
 let theme = createTheme({
   components: {
@@ -36,9 +38,24 @@ let theme = createTheme({
 });
 
 export default function ChiefDashboard() {
+  const fetchContext = useContext(FetchContext);
+  const [staffDashboardData, setStaffDashboardData] = useState();
   const [selectedComponent, setSelectedComponent] = useState('schedule');
   console.log(selectedComponent);
 
+  useEffect(() => {
+    const getStaffDashboardData = async () => {
+      try {
+        const { data } = await fetchContext.authAxios.get('staff/');
+        setStaffDashboardData(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getStaffDashboardData();
+  }, [fetchContext]);
+  console.log('staff-data:', staffDashboardData);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
