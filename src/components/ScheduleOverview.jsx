@@ -13,7 +13,7 @@ import { Paper } from '@mui/material';
 export default function ScheduleOverview() {
   let operationRes = [];
   const fetchContext = useContext(FetchContext);
-  const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(true);
   const [operation, setOperation] = useState([]);
   const [date, setDate] = useState(new Date());
   const [ddmmyy, setDDMMYY] = useState(
@@ -79,7 +79,6 @@ export default function ScheduleOverview() {
               <OperationRoomCard
                 op={op}
                 date={ddmmyy}
-                refresh={refresh}
                 setRefresh={setRefresh}
               />
             </Grid>

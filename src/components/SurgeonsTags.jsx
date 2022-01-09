@@ -9,11 +9,8 @@ import { FetchContext } from '../context/FetchContext';
 const icon = <CheckBoxOutlineBlankIcon fontSize='small' />;
 const checkedIcon = <CheckBoxIcon fontSize='small' />;
 
-export default function SurgeonsTags({ setSelectedSurgeons, currentSurgeons }) {
+export default function SurgeonsTags({ setSelectedSurgeons }) {
   const fetchContext = useContext(FetchContext);
-  const [value, setValue] = useState([currentSurgeons]);
-  console.log(currentSurgeons);
-  console.log(value);
   const [surgeons, setSurgeons] = useState([]);
 
   useEffect(() => {
@@ -55,7 +52,6 @@ export default function SurgeonsTags({ setSelectedSurgeons, currentSurgeons }) {
       disableCloseOnSelect
       autoHighlight
       getOptionLabel={(option) => option.name}
-      // defaultValue={value}
       onChange={(event, value) => handleChange(value)}
       renderOption={(props, option, { selected }) => (
         <li {...props} style={{ fontSize: 14 }}>

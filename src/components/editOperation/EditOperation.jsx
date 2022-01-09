@@ -19,7 +19,7 @@ export default function EditOperation({
   operationData,
   handleClose,
   currentID,
-  setRefresh,
+  closeViewSchedule,
 }) {
   const data = operationData;
   console.log(data);
@@ -29,6 +29,7 @@ export default function EditOperation({
   const [selectedPatient, setSelectedPatient] = useState(data.patientID);
   const [time, setTime] = useState(data.time);
   const [operationName, setOperationName] = useState(data.operation);
+  const [postOpReport, setPostOpReport] = useState(data.postOpReport);
 
   const editOperation = async () => {
     try {
@@ -42,6 +43,7 @@ export default function EditOperation({
           patientID: selectedPatient._id,
           date: data.date,
           time: time,
+          postOpReport: postOpReport,
         }
       );
     } catch (error) {
@@ -52,9 +54,10 @@ export default function EditOperation({
   const handleSubmit = () => {
     editOperation();
     handleClose();
-    setRefresh(true);
+    closeViewSchedule();
     console.log(selectedSurgeons);
   };
+  console.log(postOpReport);
 
   return (
     <Paper
@@ -155,6 +158,30 @@ export default function EditOperation({
               </TableCell>
             </TableRow>
             <PatientDetailsOnSelect selectedPatient={selectedPatient} />
+            <TableRow>
+              <TableCell
+                sx={{
+                  color: '#4682B4',
+                  fontWeight: '600',
+                  verticalAlign: 'top',
+                }}
+              >
+                Post Operation Report
+              </TableCell>
+              <TableCell colSpan={2}>
+                <TextField
+                  size='small'
+                  sx={{ display: 'flex', mb: 7 }}
+                  id='input'
+                  multiline
+                  rows={4}
+                  maxRows={4}
+                  defaultValue={data.postOpReport}
+                  variant='outlined'
+                  onChange={(e) => setPostOpReport(e.target.value)}
+                />
+              </TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>

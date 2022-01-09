@@ -25,24 +25,19 @@ const modalStyle = {
   p: 2,
 };
 
-export default function ViewSchedule({ operationData, currentID }) {
-  const [data, setData] = useState(null);
+export default function ViewSchedule({
+  operationData,
+  currentID,
+  closeViewSchedule,
+}) {
   const [open, setOpen] = useState(false);
-  const [refresh, setRefresh] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
 
-  useEffect(() => {
-    setData(operationData);
-  }, [refresh]);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
-      <TableContainer>
+      <TableContainer sx={{ mb: 7 }}>
         <Table
           stickyHeader
           aria-label='view table'
@@ -73,11 +68,17 @@ export default function ViewSchedule({ operationData, currentID }) {
           </TableBody>
         </Table>
       </TableContainer>
+
       <Fab
         size='medium'
         aria-label='edit'
         onClick={handleOpen}
-        sx={{ position: 'absolute', bottom: 0, right: 0, m: 2 }}
+        sx={{
+          position: 'absolute',
+          bottom: 0,
+          right: 0,
+          m: 2,
+        }}
       >
         <EditIcon />
       </Fab>
@@ -92,7 +93,7 @@ export default function ViewSchedule({ operationData, currentID }) {
             operationData={operationData}
             handleClose={handleClose}
             currentID={currentID}
-            setRefresh={setRefresh}
+            closeViewSchedule={closeViewSchedule}
           />
         </Box>
       </Modal>
