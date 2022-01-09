@@ -1,8 +1,6 @@
 import React from 'react';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import EditIcon from '@mui/icons-material/Edit';
-import Fab from '@mui/material/Fab';
 
 export default function ViewOperation({ operationData }) {
   const data = operationData;
@@ -14,18 +12,6 @@ export default function ViewOperation({ operationData }) {
   const nurses = nursesList.join(', ');
 
   return (
-    // <TableContainer>
-    //   <Table
-    //     stickyHeader
-    //     aria-label='view table'
-    //     sx={{
-    //       [`& .${tableCellClasses.root}`]: {
-    //         borderBottom: 'none',
-    //         p: 0.8,
-    //       },
-    //     }}
-    //   >
-    //     <TableBody>
     <>
       <TableRow>
         <TableCell sx={{ color: '#4682B4', fontWeight: '600' }}>
@@ -60,16 +46,5 @@ export default function ViewOperation({ operationData }) {
         <TableCell>{data === null ? ' ' : nurses}</TableCell>
       </TableRow>
     </>
-    //     </TableBody>
-    //   </Table>
-    // </TableContainer>
-
-    // <Fab
-    //   size='medium'
-    //   aria-label='edit'
-    //   sx={{ position: 'absolute', bottom: 0, right: 0, m: 2 }}
-    // >
-    //   <EditIcon />
-    // </Fab>
   );
 }

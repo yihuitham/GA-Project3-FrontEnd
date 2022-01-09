@@ -13,7 +13,7 @@ import { FetchContext } from '../context/FetchContext';
 import { AuthContext } from '../context/AuthContext';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import ViewOperation from '../components/ViewOperation';
 import ViewPatient from '../components/ViewPatient';

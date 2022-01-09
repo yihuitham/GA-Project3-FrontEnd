@@ -1,15 +1,6 @@
 import React, { useState, useContext } from 'react';
-import {
-  Box,
-  TextField,
-  createTheme,
-  ThemeProvider,
-  CssBaseline,
-  Grid,
-  Button,
-  Typography,
-  Paper,
-} from '@mui/material';
+import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';

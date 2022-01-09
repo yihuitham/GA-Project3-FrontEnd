@@ -11,10 +11,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/styles';
-import ViewOperation from './ViewOperation';
 import NewOperation from './NewOperation';
-
-const tableStyle = { p: 0, color: '#3A3B3C' };
+import ViewSchedule from './ViewSchedule';
 
 const CardTableCell = styled(TableCell)({
   padding: 0,
@@ -91,7 +89,7 @@ function OperationRoomCard({ op, date, refresh, setRefresh }) {
       >
         <Box sx={modalStyle}>
           {op._id ? (
-            <ViewOperation operationData={op} />
+            <ViewSchedule operationData={op} />
           ) : (
             <NewOperation
               operationData={op}
