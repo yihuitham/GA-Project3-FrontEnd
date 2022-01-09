@@ -1,6 +1,9 @@
 import React, { useState, useContext } from 'react';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import Modal from '@mui/material/Modal';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {
   Box,
   TextField,
@@ -20,8 +23,16 @@ import TableRow from '@mui/material/TableRow';
 import SaveIcon from '@mui/icons-material/Save';
 import Fab from '@mui/material/Fab';
 import { FetchContext } from '../context/FetchContext';
+import ResponseModal from './ResponseModal';
+import WarningModal from './WarningModal';
 
-export default function EditStaff({ data, handleClose, setRefresh }) {
+export default function EditStaff({
+  data,
+  handleEditClose,
+  setRefresh,
+  refresh,
+  handleRefresh,
+}) {
   const fetchContext = useContext(FetchContext);
   const [name, setName] = useState(data.name);
   const [NRIC, setNRIC] = useState(data.NRIC);
@@ -29,26 +40,76 @@ export default function EditStaff({ data, handleClose, setRefresh }) {
   const [gender, setGender] = useState(data.gender);
   const [contact, setContact] = useState(data.contact);
   const [speciality, setSpeciality] = useState(data.speciality);
+  const [staffID, setStaffID] = useState(data.staff_id);
+  const [response, setResponse] = useState(null);
+  const [openResponseModal, setResponseModal] = useState(false);
+  const [openWarningModal, setWarningModal] = useState(false);
 
   const editStaff = async () => {
     try {
       const response = await fetchContext.authAxios.post('/staff/edit', {
         id: data._id,
         name: name,
-        NRIC: NRIC,
         role: role,
         gender: gender,
         contact: contact,
         speciality: speciality,
       });
+      setResponse(response.data.message);
     } catch (error) {
       console.log(error);
+      setResponse(error.response.data.message);
     }
+  };
+
+  const deleteStaff = async () => {
+    try {
+      const response = await fetchContext.authAxios.delete(
+        `/staff/delete/${data._id}`
+      );
+      setResponse(response.data.message);
+    } catch (error) {
+      console.log(error);
+      setResponse(error.response.data.message);
+    }
+  };
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '76vw',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    borderRadius: 2,
+    p: 2,
+  };
+
+  const handleWarningOpen = () => {
+    setWarningModal(true);
+  };
+  const handleResponseOpen = () => {
+    setResponseModal(true);
+    handleRefresh();
+  };
+
+  const handleResponseClose = () => {
+    setResponseModal(false);
+    handleRefresh();
+    if (response === 'Staff details updated successfully!') handleEditClose();
+  };
+
+  const handleWarningClose = () => {
+    setWarningModal(false);
+    handleRefresh();
+    handleEditClose();
+    // if (response === 'Staff details updated successfully!') handleEditClose();
   };
 
   const handleSubmit = () => {
     editStaff();
-    handleClose();
+    handleResponseOpen();
   };
 
   const handleRoleChange = (e) => {
@@ -63,12 +124,10 @@ export default function EditStaff({ data, handleClose, setRefresh }) {
     setSpeciality(e.target.value);
   };
 
-  //   console.log('name', name);
-  //   console.log('nric', NRIC);
-  //   console.log('role', role);
-  //   console.log('gender', gender);
-  //   console.log('contact', contact);
-  //   console.log('speciality', speciality);
+  const handleDeleteSubmit = () => {
+    deleteStaff();
+    handleWarningClose();
+  };
 
   return (
     <Paper
@@ -85,6 +144,34 @@ export default function EditStaff({ data, handleClose, setRefresh }) {
       }}
       elevation={0}
     >
+      <Modal
+        open={openResponseModal}
+        onClose={handleResponseClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box sx={modalStyle}>
+          <ResponseModal
+            response={response}
+            handleResponseClose={handleResponseClose}
+            setRefresh={setRefresh}
+          />
+        </Box>
+      </Modal>
+      <Modal
+        open={openWarningModal}
+        onClose={handleWarningClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box sx={modalStyle}>
+          <WarningModal
+            response={response}
+            handleDeleteSubmit={handleDeleteSubmit}
+            setRefresh={setRefresh}
+          />
+        </Box>
+      </Modal>
       <TableContainer>
         <Table
           stickyHeader
@@ -120,14 +207,24 @@ export default function EditStaff({ data, handleClose, setRefresh }) {
               <TableCell>NRIC</TableCell>
               <TableCell>
                 <TextField
-                  inputProps={{ style: { fontSize: 14 } }}
+                  inputProps={{ style: { fontSize: 14 }, readOnly: true }}
                   size='small'
                   variant='standard'
                   sx={{ width: 350 }}
                   defaultValue={NRIC}
-                  onChange={(e) => {
-                    setNRIC(e.target.value);
-                  }}
+                />
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align='center'> </TableCell>
+              <TableCell>Staff ID</TableCell>
+              <TableCell>
+                <TextField
+                  inputProps={{ style: { fontSize: 14 }, readOnly: true }}
+                  size='small'
+                  variant='standard'
+                  sx={{ width: 350 }}
+                  defaultValue={staffID}
                 />
               </TableCell>
             </TableRow>
@@ -227,6 +324,22 @@ export default function EditStaff({ data, handleClose, setRefresh }) {
                 />
               </TableCell>
             </TableRow>
+            {/* <TableRow>
+              <TableCell align='center'> </TableCell>
+              <TableCell>Password</TableCell>
+              <TableCell>
+                <TextField
+                  inputProps={{ style: { fontSize: 14 }, readOnly: true }}
+                  size='small'
+                  variant='standard'
+                  sx={{ width: 350 }}
+                  defaultValue={data.password}
+                  onChange={(e) => {
+                    setContact(e.target.value);
+                  }}
+                />
+              </TableCell>
+            </TableRow> */}
           </TableBody>
         </Table>
       </TableContainer>
@@ -234,10 +347,18 @@ export default function EditStaff({ data, handleClose, setRefresh }) {
         size='medium'
         aria-label='edit'
         onClick={handleSubmit}
-        sx={{ position: 'absolute', bottom: 0, right: 0, m: 2 }}
+        sx={{ position: 'absolute', bottom: 0, right: 70, m: 2 }}
       >
         <SaveIcon fontSize='medium' />
       </Fab>
+      <IconButton
+        size='large'
+        aria-label='delete'
+        onClick={handleWarningOpen}
+        sx={{ position: 'absolute', bottom: 0, right: 0, m: 2 }}
+      >
+        <DeleteIcon />
+      </IconButton>
     </Paper>
   );
 }
