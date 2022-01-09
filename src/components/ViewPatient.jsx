@@ -16,7 +16,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 
-export default function ViewOperation({ operationData }) {
+export default function ViewPatient({ operationData }) {
   const data = operationData;
 
   return (
