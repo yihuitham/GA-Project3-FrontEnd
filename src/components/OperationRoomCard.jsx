@@ -41,7 +41,7 @@ function Content(info) {
               <TableRow>
                 <CardTableCell variant='footer'>Surgeon:</CardTableCell>
                 <CardTableCell variant='footer' align='center'>
-                  {info.surgeonID.name}
+                  {info.surgeonID[0].name}
                 </CardTableCell>
               </TableRow>
               <TableRow>
@@ -89,7 +89,7 @@ function OperationRoomCard({ op, date, refresh, setRefresh }) {
       >
         <Box sx={modalStyle}>
           {op._id ? (
-            <ViewSchedule operationData={op} />
+            <ViewSchedule operationData={op} currentID={op._id} />
           ) : (
             <NewOperation
               operationData={op}

@@ -19,7 +19,7 @@ const FetchProvider = ({ children }) => {
     (config) => {
       //The JSON Web Token is on AuthContext in AuthState. Before we call for the token itself, we need to put in this scheme called bearer. This is because the tools that we are going to use on the API expect this scheme to be in place.
       config.headers.Authorization = `Bearer ${authContext.authState.token}`;
-      console.log('config token:', authContext.authState.token);
+      // console.log('config token:', authContext.authState.token);
       return config;
     },
     (error) => {

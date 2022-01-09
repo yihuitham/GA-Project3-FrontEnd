@@ -41,7 +41,6 @@ export default function ChiefDashboard() {
   const fetchContext = useContext(FetchContext);
   const [staffDashboardData, setStaffDashboardData] = useState();
   const [selectedComponent, setSelectedComponent] = useState('schedule');
-  console.log(selectedComponent);
 
   useEffect(() => {
     const getStaffDashboardData = async () => {

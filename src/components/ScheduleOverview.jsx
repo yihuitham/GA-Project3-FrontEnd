@@ -34,14 +34,12 @@ export default function ScheduleOverview() {
       try {
         const res = await fetchContext.authAxios.get(`operation/${i}/${date}`);
         operationRes.push(res.data);
-        console.log(res.data);
       } catch (error) {
         operationRes.push({ operatingRoom: i });
         console.log(error);
       }
     }
     setOperation(operationRes);
-    console.log(operationRes);
   };
 
   useEffect(async () => {
@@ -50,7 +48,7 @@ export default function ScheduleOverview() {
 
   // console.log('Date', date);
   // console.log('ddmmyy', ddmmyy);
-  console.log('Operation Data', operation);
+  // console.log('Operation Data', operation);
 
   return (
     <Paper

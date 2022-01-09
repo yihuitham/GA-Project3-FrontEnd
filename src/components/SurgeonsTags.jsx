@@ -5,16 +5,15 @@ import Autocomplete from '@mui/material/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { FetchContext } from '../context/FetchContext';
-import { Typography } from '@mui/material';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize='small' />;
 const checkedIcon = <CheckBoxIcon fontSize='small' />;
 
-export default function SurgeonsTags({
-  selectedSurgeons,
-  setSelectedSurgeons,
-}) {
+export default function SurgeonsTags({ setSelectedSurgeons, currentSurgeons }) {
   const fetchContext = useContext(FetchContext);
+  const [value, setValue] = useState([currentSurgeons]);
+  console.log(currentSurgeons);
+  console.log(value);
   const [surgeons, setSurgeons] = useState([]);
 
   useEffect(() => {
@@ -56,6 +55,7 @@ export default function SurgeonsTags({
       disableCloseOnSelect
       autoHighlight
       getOptionLabel={(option) => option.name}
+      // defaultValue={value}
       onChange={(event, value) => handleChange(value)}
       renderOption={(props, option, { selected }) => (
         <li {...props} style={{ fontSize: 14 }}>
@@ -73,9 +73,3 @@ export default function SurgeonsTags({
     />
   );
 }
-
-const surgeons = [
-  { name: 'john', id: 123 },
-  { name: 'johnny', id: 456 },
-  { name: 'jon', id: 789 },
-];

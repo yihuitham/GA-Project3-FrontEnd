@@ -4,16 +4,14 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import { FetchContext } from '../context/FetchContext';
+import { FetchContext } from '../../context/FetchContext';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize='small' />;
 const checkedIcon = <CheckBoxIcon fontSize='small' />;
 
 export default function Nursestags({ setSelectedNurses, currentNurses }) {
   const fetchContext = useContext(FetchContext);
-  const [value, setValue] = useState([currentNurses]);
-  console.log(currentNurses);
-  console.log(value);
+  const [value, setValue] = useState(currentNurses);
   const [nurses, setNurses] = useState([]);
 
   useEffect(() => {
@@ -55,7 +53,8 @@ export default function Nursestags({ setSelectedNurses, currentNurses }) {
       disableCloseOnSelect
       autoHighlight
       getOptionLabel={(option) => option.name}
-      // defaultValue={value}
+      defaultValue={value}
+      isOptionEqualToValue={(option, value) => option._id === value._id}
       onChange={(event, value) => handleChange(value)}
       renderOption={(props, option, { selected }) => (
         <li {...props} style={{ fontSize: 14 }}>

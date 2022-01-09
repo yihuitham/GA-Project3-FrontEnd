@@ -4,23 +4,21 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import { FetchContext } from '../context/FetchContext';
+import { FetchContext } from '../../context/FetchContext';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize='small' />;
 const checkedIcon = <CheckBoxIcon fontSize='small' />;
 
-export default function Nursestags({ setSelectedNurses, currentNurses }) {
+export default function SurgeonsTags({ setSelectedSurgeons, currentSurgeons }) {
   const fetchContext = useContext(FetchContext);
-  const [value, setValue] = useState([currentNurses]);
-  console.log(currentNurses);
-  console.log(value);
-  const [nurses, setNurses] = useState([]);
+  const [value, setValue] = useState(currentSurgeons);
+  const [surgeons, setSurgeons] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetchContext.authAxios.get(`staff/nurses`);
-        const nurses = res.data.sort(function (a, b) {
+        const res = await fetchContext.authAxios.get(`staff/surgeons`);
+        const surgeons = res.data.sort(function (a, b) {
           if (a.name < b.name) {
             return -1;
           }
@@ -29,7 +27,7 @@ export default function Nursestags({ setSelectedNurses, currentNurses }) {
           }
           return 0;
         });
-        setNurses(nurses);
+        setSurgeons(surgeons);
       } catch (err) {
         console.log(err);
       }
@@ -42,20 +40,21 @@ export default function Nursestags({ setSelectedNurses, currentNurses }) {
       return value._id;
     });
     console.log(IDs);
-    setSelectedNurses(IDs);
+    setSelectedSurgeons(IDs);
   };
 
-  // console.log('selected nurses', selectedNurses);
+  // console.log('selected surgeons', selectedSurgeons);
 
   return (
     <Autocomplete
       multiple
       id='checkboxes-tags-demo'
-      options={nurses}
+      options={surgeons}
       disableCloseOnSelect
       autoHighlight
       getOptionLabel={(option) => option.name}
-      // defaultValue={value}
+      defaultValue={value}
+      isOptionEqualToValue={(option, value) => option._id === value._id}
       onChange={(event, value) => handleChange(value)}
       renderOption={(props, option, { selected }) => (
         <li {...props} style={{ fontSize: 14 }}>

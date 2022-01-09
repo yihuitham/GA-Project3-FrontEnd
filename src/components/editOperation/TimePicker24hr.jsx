@@ -7,9 +7,11 @@ import TimePicker from '@mui/lab/TimePicker';
 const { format } = require('date-fns');
 
 export default function TimePicker24hr({ setSelectedTime, date, time }) {
-  // const dateFormatted = date.split('-').join('.') + ' ' + time;
-  // const value = time ? new Date(dateFormatted) : null;
-  // console.log(new Date(dateFormatted));
+  const dateFormatted =
+    date.split('-').reverse().join('.') + ' ' + time + ':00';
+  const value = time ? new Date(dateFormatted) : null;
+  console.log(dateFormatted);
+  console.log(new Date(dateFormatted));
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <TimePicker
@@ -18,7 +20,7 @@ export default function TimePicker24hr({ setSelectedTime, date, time }) {
         ampm={false}
         inputFormat='HH:mm'
         mask='__:__'
-        // value={value}
+        value={value}
         onChange={(newValue) => {
           if (newValue == 'Invalid Date') {
             console.log('wrong format');

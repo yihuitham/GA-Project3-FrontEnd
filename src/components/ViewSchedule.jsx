@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,7 +11,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import ViewOperation from '../components/ViewOperation';
 import ViewPatient from '../components/ViewPatient';
-import EditOperation from './EditOperation';
+import EditOperation from './editOperation/EditOperation';
 
 const modalStyle = {
   position: 'absolute',
@@ -25,14 +25,20 @@ const modalStyle = {
   p: 2,
 };
 
-export default function ViewSchedule({ operationData }) {
+export default function ViewSchedule({ operationData, currentID }) {
+  const [data, setData] = useState(null);
   const [open, setOpen] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    setData(operationData);
+  }, [refresh]);
 
   return (
     <>
@@ -85,6 +91,8 @@ export default function ViewSchedule({ operationData }) {
           <EditOperation
             operationData={operationData}
             handleClose={handleClose}
+            currentID={currentID}
+            setRefresh={setRefresh}
           />
         </Box>
       </Modal>

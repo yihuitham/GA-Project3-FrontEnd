@@ -12,37 +12,48 @@ import TimePicker24hr from './TimePicker24hr';
 import Nursestags from './NursesTags';
 import SurgeonsTags from './SurgeonsTags';
 import PatientAutocomplete from './PatientAutocomplete';
-import PatientDetailsOnSelect from './PatientDetailsOnSelect';
-import { FetchContext } from '../context/FetchContext';
+import PatientDetailsOnSelect from '../PatientDetailsOnSelect';
+import { FetchContext } from '../../context/FetchContext';
 
-export default function EditOperation({ operationData, handleClose }) {
+export default function EditOperation({
+  operationData,
+  handleClose,
+  currentID,
+  setRefresh,
+}) {
   const data = operationData;
+  console.log(data);
   const fetchContext = useContext(FetchContext);
-  const [selectedSurgeons, setSelectedSurgeons] = useState([]);
-  const [selectedNurses, setSelectedNurses] = useState([]);
-  const [selectedPatient, setSelectedPatient] = useState(null);
-  const [time, setTime] = useState(null);
-  const [operationName, setOperationName] = useState(null);
+  const [selectedSurgeons, setSelectedSurgeons] = useState(data.surgeonID);
+  const [selectedNurses, setSelectedNurses] = useState(data.nursesID);
+  const [selectedPatient, setSelectedPatient] = useState(data.patientID);
+  const [time, setTime] = useState(data.time);
+  const [operationName, setOperationName] = useState(data.operation);
 
-  const createNewOperation = async () => {
+  const editOperation = async () => {
     try {
-      const response = await fetchContext.authAxios.post('/operation', {
-        operatingRoom: data.operatingRoom,
-        operation: operationName,
-        surgeonID: selectedSurgeons,
-        nursesID: selectedNurses,
-        patientID: selectedPatient._id,
-        date: data.date,
-        time: time,
-      });
+      const response = await fetchContext.authAxios.put(
+        `/operation/${currentID}`,
+        {
+          operatingRoom: data.operatingRoom,
+          operation: operationName,
+          surgeonID: selectedSurgeons,
+          nursesID: selectedNurses,
+          patientID: selectedPatient._id,
+          date: data.date,
+          time: time,
+        }
+      );
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleSubmit = () => {
-    createNewOperation();
+    editOperation();
     handleClose();
+    setRefresh(true);
+    console.log(selectedSurgeons);
   };
 
   return (
@@ -88,7 +99,11 @@ export default function EditOperation({ operationData, handleClose }) {
               <TableCell align='center'> </TableCell>
               <TableCell>{`Operation Time (24hr format)`} </TableCell>
               <TableCell>
-                <TimePicker24hr setTime={setTime} time={data.time} />
+                <TimePicker24hr
+                  setTime={setTime}
+                  date={data.date}
+                  time={time}
+                />
               </TableCell>
             </TableRow>
             <TableRow>
@@ -99,10 +114,10 @@ export default function EditOperation({ operationData, handleClose }) {
                   inputProps={{ style: { fontSize: 14 } }}
                   size='small'
                   variant='standard'
+                  value={data.operation}
                   sx={{ width: 350 }}
                   onChange={(e) => {
                     setOperationName(e.target.value);
-                    // console.log(operationName);
                   }}
                 />
               </TableCell>
@@ -112,8 +127,8 @@ export default function EditOperation({ operationData, handleClose }) {
               <TableCell>Surgeon </TableCell>
               <TableCell>
                 <SurgeonsTags
-                  selectedSurgeons={selectedSurgeons}
                   setSelectedSurgeons={setSelectedSurgeons}
+                  currentSurgeons={data.surgeonID}
                 />
               </TableCell>
             </TableRow>
@@ -122,8 +137,8 @@ export default function EditOperation({ operationData, handleClose }) {
               <TableCell>Nurses </TableCell>
               <TableCell>
                 <Nursestags
-                  selectedNurses={selectedNurses}
                   setSelectedNurses={setSelectedNurses}
+                  currentNurses={data.nursesID}
                 />
               </TableCell>
             </TableRow>

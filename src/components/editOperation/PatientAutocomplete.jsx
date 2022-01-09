@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { FetchContext } from '../context/FetchContext';
+import { FetchContext } from '../../context/FetchContext';
 
 export default function PatientAutocomplete({
   selectedPatient,
@@ -39,11 +39,17 @@ export default function PatientAutocomplete({
       id='auto-complete'
       autoComplete
       autoHighlight
+      value={selectedPatient}
+      isOptionEqualToValue={(option, value) => option._id === value._id}
       onChange={(e, value) => {
         setSelectedPatient(value);
       }}
       renderInput={(params) => (
-        <TextField {...params} variant='standard' style={{ width: 350 }} />
+        <TextField
+          {...params}
+          variant='standard'
+          style={{ width: 350, fontSize: 14 }}
+        />
       )}
     />
   );

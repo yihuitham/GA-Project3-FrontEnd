@@ -11,6 +11,12 @@ export default function ViewOperation({ operationData }) {
   }
   const nurses = nursesList.join(', ');
 
+  const surgeonsList = [];
+  for (let i = 0; i < data.surgeonID.length; i++) {
+    surgeonsList.push(data.surgeonID[i].name);
+  }
+  const surgeons = surgeonsList.join(', ');
+
   return (
     <>
       <TableRow>
@@ -38,7 +44,7 @@ export default function ViewOperation({ operationData }) {
       <TableRow>
         <TableCell align='center'> </TableCell>
         <TableCell>Surgeon </TableCell>
-        <TableCell>{data === null ? ' ' : data.surgeonID.name}</TableCell>
+        <TableCell>{data === null ? ' ' : surgeons}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell align='center'> </TableCell>

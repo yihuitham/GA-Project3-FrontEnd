@@ -14,34 +14,36 @@ import SurgeonsTags from './SurgeonsTags';
 import PatientAutocomplete from './PatientAutocomplete';
 import PatientDetailsOnSelect from './PatientDetailsOnSelect';
 import { FetchContext } from '../context/FetchContext';
+import { Typography } from '@mui/material';
 
 export default function NewOperation({ operationData, date, handleClose }) {
   const data = operationData;
-  const fetchContext = useContext(FetchContext);
+  console.log(operationData);
+  // const fetchContext = useContext(FetchContext);
   const [selectedSurgeons, setSelectedSurgeons] = useState([]);
   const [selectedNurses, setSelectedNurses] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [operationName, setOperationName] = useState(null);
 
-  const createNewOperation = async () => {
-    try {
-      const response = await fetchContext.authAxios.post('/operation', {
-        operatingRoom: data.operatingRoom,
-        operation: operationName,
-        surgeonID: selectedSurgeons,
-        nursesID: selectedNurses,
-        patientID: selectedPatient._id,
-        date: date,
-        time: selectedTime,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const createNewOperation = async () => {
+  //   try {
+  //     const response = await fetchContext.authAxios.post('/operation', {
+  //       operatingRoom: data.operatingRoom,
+  //       operation: operationName,
+  //       surgeonID: selectedSurgeons,
+  //       nursesID: selectedNurses,
+  //       patientID: selectedPatient._id,
+  //       date: date,
+  //       time: selectedTime,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleSubmit = () => {
-    createNewOperation();
+    // createNewOperation();
     handleClose();
   };
 
