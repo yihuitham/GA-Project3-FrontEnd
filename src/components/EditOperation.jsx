@@ -15,13 +15,13 @@ import PatientAutocomplete from './PatientAutocomplete';
 import PatientDetailsOnSelect from './PatientDetailsOnSelect';
 import { FetchContext } from '../context/FetchContext';
 
-export default function NewOperation({ operationData, date, handleClose }) {
+export default function EditOperation({ operationData, handleClose }) {
   const data = operationData;
   const fetchContext = useContext(FetchContext);
   const [selectedSurgeons, setSelectedSurgeons] = useState([]);
   const [selectedNurses, setSelectedNurses] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
+  const [time, setTime] = useState(null);
   const [operationName, setOperationName] = useState(null);
 
   const createNewOperation = async () => {
@@ -32,8 +32,8 @@ export default function NewOperation({ operationData, date, handleClose }) {
         surgeonID: selectedSurgeons,
         nursesID: selectedNurses,
         patientID: selectedPatient._id,
-        date: date,
-        time: selectedTime,
+        date: data.date,
+        time: time,
       });
     } catch (error) {
       console.log(error);
@@ -82,13 +82,13 @@ export default function NewOperation({ operationData, date, handleClose }) {
             <TableRow>
               <TableCell align='center'> </TableCell>
               <TableCell>Operation Date </TableCell>
-              <TableCell>{date}</TableCell>
+              <TableCell>{data.date}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell align='center'> </TableCell>
               <TableCell>{`Operation Time (24hr format)`} </TableCell>
               <TableCell>
-                <TimePicker24hr setSelectedTime={setSelectedTime} date={date} />
+                <TimePicker24hr setTime={setTime} time={data.time} />
               </TableCell>
             </TableRow>
             <TableRow>

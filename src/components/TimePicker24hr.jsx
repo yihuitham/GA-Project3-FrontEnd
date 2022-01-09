@@ -4,7 +4,9 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import TimePicker from '@mui/lab/TimePicker';
 
-export default function TimePicker24hr({ setTime }) {
+const { format } = require('date-fns');
+
+export default function TimePicker24hr({ setSelectedTime, date }) {
   const [value, setValue] = useState(null);
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -16,7 +18,13 @@ export default function TimePicker24hr({ setTime }) {
         mask='__:__'
         value={value}
         onChange={(newValue) => {
-          setTime(newValue.getTime());
+          if (newValue == 'Invalid Date') {
+            console.log('wrong format');
+          } else {
+            const newTime = format(new Date(newValue), 'hh:mm');
+            setSelectedTime(newTime);
+            console.log(newTime);
+          }
         }}
         renderInput={(params) => (
           <TextField {...params} variant='standard' sx={{ width: 43 }} />
