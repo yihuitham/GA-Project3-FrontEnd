@@ -1,101 +1,44 @@
 import React from 'react';
-import {
-  Box,
-  TextField,
-  createTheme,
-  ThemeProvider,
-  CssBaseline,
-  Grid,
-  Button,
-  Typography,
-  Paper,
-  TableBody,
-} from '@mui/material';
-import Table from '@mui/material/Table';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
+import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
 export default function ViewPatient({ operationData }) {
   const data = operationData;
 
   return (
-    <Paper
-      sx={{
-        maxHeight: '80vh',
-        overflow: 'auto',
-        maxWidth: '76vw',
-        display: 'flex',
-        flex: 1,
-        m: 0,
-        borderRadius: 2,
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-      elevation={0}
-    >
-      <TableContainer>
-        <Table
-          stickyHeader
-          aria-label='view table'
-          sx={{
-            [`& .${tableCellClasses.root}`]: {
-              borderBottom: 'none',
-              p: 0.8,
-            },
-          }}
-        >
-          <TableBody>
-            <TableRow>
-              <TableCell
-                sx={{ color: '#4682B4', fontWeight: '600' }}
-                align='center'
-              >
-                Patient Details
-              </TableCell>
-              <TableCell align='left'>Name </TableCell>
-              <TableCell align='left'>
-                {data === null ? ' ' : data.name}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align='center'> </TableCell>
-              <TableCell align='left'>Identification Number</TableCell>
-              <TableCell align='left'>
-                {data === null ? ' ' : data.nric}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align='center'> </TableCell>
-              <TableCell align='left'>Age</TableCell>
-              <TableCell align='left'>
-                {data === null ? ' ' : data.age}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align='center'> </TableCell>
-              <TableCell align='left'>Blood Type</TableCell>
-              <TableCell align='left'>
-                {data === null ? ' ' : data.bloodType}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align='center'> </TableCell>
-              <TableCell align='left'>Medical Allergies</TableCell>
-              <TableCell align='left'>
-                {data === null ? ' ' : data.allergy}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align='center'> </TableCell>
-              <TableCell align='left'>Medical Condition</TableCell>
-              <TableCell align='left'>
-                {data === null ? ' ' : data.medicalCondition}
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+    <>
+      <TableRow>
+        <TableCell sx={{ color: '#4682B4', fontWeight: '600' }}>
+          Patient Details
+        </TableCell>
+        <TableCell>Name </TableCell>
+        <TableCell>{data === null ? ' ' : data.name}</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell align='center'> </TableCell>
+        <TableCell>Identification Number</TableCell>
+        <TableCell>{data === null ? ' ' : data.nric}</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell align='center'> </TableCell>
+        <TableCell>Age</TableCell>
+        <TableCell>{data === null ? ' ' : data.age}</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell align='center'> </TableCell>
+        <TableCell>Blood Type</TableCell>
+        <TableCell>{data === null ? ' ' : data.bloodType}</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell align='center'> </TableCell>
+        <TableCell>Medical Allergies</TableCell>
+        <TableCell>{data === null ? ' ' : data.allergy.join(', ')}</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell align='center'> </TableCell>
+        <TableCell>Medical Condition</TableCell>
+        <TableCell>{data === null ? ' ' : data.medicalCondition}</TableCell>
+      </TableRow>
+    </>
   );
 }

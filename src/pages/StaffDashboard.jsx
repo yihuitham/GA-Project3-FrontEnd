@@ -1,28 +1,23 @@
 import React, { useState, useContext, useEffect } from 'react';
-import {
-  Box,
-  TextField,
-  createTheme,
-  ThemeProvider,
-  CssBaseline,
-  Grid,
-  Button,
-  Typography,
-  Paper,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import StaffAppBar from '../components/StaffAppBar';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import CalendarPicker from '@mui/lab/CalendarPicker';
-import { makeStyles } from '@mui/styles';
 import { FetchContext } from '../context/FetchContext';
 import { AuthContext } from '../context/AuthContext';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
 import ViewOperation from '../components/ViewOperation';
 import ViewPatient from '../components/ViewPatient';
 import ViewReport from '../components/ViewReport';
-import { publicFetch } from '../util/fetch';
 
 let theme = createTheme({
   components: {
@@ -47,7 +42,6 @@ let theme = createTheme({
 });
 
 export default function StaffDashboard() {
-  // console.log(theme.mixins.toolbar);
   const authContext = useContext(AuthContext);
   const fetchContext = useContext(FetchContext);
   const [date, setDate] = useState(new Date());
@@ -63,18 +57,6 @@ export default function StaffDashboard() {
       newDate.getMonth() + 1
     }-${newDate.getFullYear()}`;
     setDDMMYY(newDDMMYY);
-
-    // const fetchAPI = async () => {
-    //   try {
-    //     const response = await publicFetch.get(
-    //       `operation/search/${authContext.authState.userInfo.role}/${authContext.authState.userInfo._id}/${newDDMMYY}`
-    //     );
-    //     setOperationData(response);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    // fetchAPI();
   };
 
   useEffect(() => {
@@ -124,7 +106,6 @@ export default function StaffDashboard() {
             sx={{
               display: 'flex',
               alignContent: 'center',
-              // justifyContent: 'center',
               width: '95vw',
               height: '85vh',
             }}
@@ -156,39 +137,43 @@ export default function StaffDashboard() {
               }}
             >
               <Paper sx={{ m: 2, p: 2, maxHeight: '75vh', overflow: 'auto' }}>
-                <Grid
-                  item
-                  xs={10}
-                  sx={{
-                    bgcolor: '#f0f0f0',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {console.log(
-                    'operation data from staffdashboard',
-                    operationData
-                  )}
-                  {operationData === undefined ||
-                  operationData.message === 'Not found' ? (
-                    '-'
-                  ) : (
-                    <ViewOperation operationData={operationData} />
-                  )}
-                  {operationData === undefined ||
-                  operationData.message === 'Not found' ? (
-                    '-'
-                  ) : (
-                    <ViewPatient operationData={operationData.patientID} />
-                  )}
-                  {operationData === undefined ||
-                  operationData.message === 'Not found' ? (
-                    '-'
-                  ) : (
-                    <ViewReport operationData={operationData} />
-                  )}
-                </Grid>
+                {console.log(
+                  'operation data from staffdashboard',
+                  operationData
+                )}
+                <TableContainer>
+                  <Table
+                    stickyHeader
+                    aria-label='view table'
+                    sx={{
+                      [`& .${tableCellClasses.root}`]: {
+                        borderBottom: 'none',
+                        p: 0.8,
+                      },
+                    }}
+                  >
+                    <TableBody>
+                      {operationData === undefined ||
+                      operationData.message === 'Not found' ? (
+                        '-'
+                      ) : (
+                        <ViewOperation operationData={operationData} />
+                      )}
+                      {operationData === undefined ||
+                      operationData.message === 'Not found' ? (
+                        '-'
+                      ) : (
+                        <ViewPatient operationData={operationData.patientID} />
+                      )}
+                      {operationData === undefined ||
+                      operationData.message === 'Not found' ? (
+                        '-'
+                      ) : (
+                        <ViewReport operationData={operationData} />
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </Paper>
             </Grid>
           </Grid>
