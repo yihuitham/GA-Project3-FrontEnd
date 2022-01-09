@@ -6,26 +6,48 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button';
 import { Box } from '@mui/system';
 import Paper from '@mui/material/Paper';
 import Modal from '@mui/material/Modal';
 import EditStaff from '../components/EditStaff';
+import NewStaff from '../components/NewStaff';
 import { FetchContext } from '../context/FetchContext';
 
 export default function PatientOverview() {
   const [staffData, setStaffData] = useState([]);
   const fetchContext = useContext(FetchContext);
-  const [open, setOpen] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openNewModal, setOpenNewModal] = useState(false);
+  const [openResponseModal, setResponseModal] = useState(false);
   const [singleStaffData, setSingleStaffData] = useState('');
   const [refresh, setRefresh] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-    setRefresh(false);
+  const handleRefresh = () => {
+    if (refresh) {
+      setRefresh(false);
+    } else {
+      setRefresh(true);
+    }
   };
-  const handleClose = () => {
-    setOpen(false);
-    setRefresh(true);
+
+  const handleEditOpen = () => {
+    setOpenEditModal(true);
+    handleRefresh();
+  };
+
+  const handleEditClose = () => {
+    setOpenEditModal(false);
+    handleRefresh();
+  };
+
+  const handleNewOpen = () => {
+    setOpenNewModal(true);
+    handleRefresh();
+  };
+  const handleNewClose = () => {
+    setOpenNewModal(false);
+    handleRefresh();
   };
 
   const modalStyle = {
@@ -54,6 +76,7 @@ export default function PatientOverview() {
   // console.log('Staff', staffData);
   // console.log('singledata', singleStaffData);
   console.log(refresh);
+
   return (
     <Paper
       sx={{
@@ -65,25 +88,53 @@ export default function PatientOverview() {
       }}
     >
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={openEditModal}
+        onClose={handleEditClose}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
         <Box sx={modalStyle}>
           <EditStaff
             data={singleStaffData}
-            handleClose={handleClose}
+            handleEditClose={handleEditClose}
             setRefresh={setRefresh}
+            refresh={refresh}
+            handleRefresh={handleRefresh}
           />
         </Box>
       </Modal>
+      <Modal
+        open={openNewModal}
+        onClose={handleNewClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box sx={modalStyle}>
+          <NewStaff
+            handleNewClose={handleNewClose}
+            setRefresh={setRefresh}
+            refresh={refresh}
+            handleRefresh={handleRefresh}
+          />
+        </Box>
+      </Modal>
+      <Button
+        variant='outlined'
+        onClick={(event) => {
+          handleNewOpen();
+        }}
+      >
+        New
+      </Button>
       <TableContainer>
         <Table stickyHeader aria-label='patient table'>
           <TableHead>
             <TableRow>
               <TableCell sx={{ fontWeight: 'bold' }}>Name</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>NRIC</TableCell>
+              <TableCell align='center' sx={{ fontWeight: 'bold' }}>
+                Staff ID
+              </TableCell>
               <TableCell align='center' sx={{ fontWeight: 'bold' }}>
                 Role
               </TableCell>
@@ -101,7 +152,7 @@ export default function PatientOverview() {
               <TableRow
                 hover
                 onClick={(event) => {
-                  handleOpen();
+                  handleEditOpen();
                   setSingleStaffData(staff);
                 }}
                 key={staff.name}
@@ -111,6 +162,7 @@ export default function PatientOverview() {
                   {staff.name}
                 </TableCell>
                 <TableCell>{staff.NRIC}</TableCell>
+                <TableCell align='center'>{staff.staff_id}</TableCell>
                 <TableCell align='center'>{staff.role}</TableCell>
                 <TableCell align='center'>{staff.gender}</TableCell>
                 <TableCell align='center'>{staff.contact}</TableCell>
