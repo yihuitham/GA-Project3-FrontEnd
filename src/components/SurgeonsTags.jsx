@@ -31,7 +31,6 @@ export default function SurgeonsTags({
           return 0;
         });
         setSurgeons(surgeons);
-        console.log('staff/nurses', res.data);
       } catch (err) {
         console.log(err);
       }
@@ -46,7 +45,8 @@ export default function SurgeonsTags({
     console.log(IDs);
     setSelectedSurgeons(IDs);
   };
-  console.log('selected surgeons', selectedSurgeons);
+
+  // console.log('selected surgeons', selectedSurgeons);
 
   return (
     <Autocomplete

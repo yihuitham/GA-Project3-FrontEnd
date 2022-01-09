@@ -71,10 +71,16 @@ const modalStyle = {
   p: 2,
 };
 
-function OperationRoomCard({ op, date }) {
+function OperationRoomCard({ op, date, refresh, setRefresh }) {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => {
+    setOpen(true);
+    setRefresh(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+    setRefresh(false);
+  };
   return (
     <>
       <Modal

@@ -27,7 +27,6 @@ export default function Nursestags({ selectedNurses, setSelectedNurses }) {
           return 0;
         });
         setNurses(nurses);
-        console.log('staff/nurses', res.data);
       } catch (err) {
         console.log(err);
       }
@@ -42,7 +41,9 @@ export default function Nursestags({ selectedNurses, setSelectedNurses }) {
     console.log(IDs);
     setSelectedNurses(IDs);
   };
-  console.log('selected nurses', selectedNurses);
+
+  // console.log('selected nurses', selectedNurses);
+
   return (
     <Autocomplete
       multiple

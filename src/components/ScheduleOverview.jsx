@@ -11,14 +11,15 @@ import { Box } from '@mui/system';
 import { Paper } from '@mui/material';
 
 export default function ScheduleOverview() {
-  const fetchContext = useContext(FetchContext);
-  const [operation, setOperation] = useState([]);
   let operationRes = [];
-
+  const fetchContext = useContext(FetchContext);
+  const [refresh, setRefresh] = useState(false);
+  const [operation, setOperation] = useState([]);
   const [date, setDate] = useState(new Date());
   const [ddmmyy, setDDMMYY] = useState(
     `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
   );
+
   const changeDate = (newDate) => {
     setDate(newDate);
     const newDDMMYY = `${newDate.getDate()}-${
@@ -27,6 +28,7 @@ export default function ScheduleOverview() {
     setDDMMYY(newDDMMYY);
     getOperationData(newDDMMYY);
   };
+
   const getOperationData = async (date) => {
     for (let i = 1; i < 9; i++) {
       try {
@@ -41,11 +43,13 @@ export default function ScheduleOverview() {
     setOperation(operationRes);
     console.log(operationRes);
   };
+
   useEffect(async () => {
     getOperationData(ddmmyy);
-  }, []);
-  console.log('Date', date);
-  console.log('ddmmyy', ddmmyy);
+  }, [refresh]);
+
+  // console.log('Date', date);
+  // console.log('ddmmyy', ddmmyy);
   console.log('Operation Data', operation);
 
   return (
@@ -74,7 +78,12 @@ export default function ScheduleOverview() {
         {operation.map((op, index) => {
           return (
             <Grid item xs={3} key={index}>
-              <OperationRoomCard op={op} date={ddmmyy} />
+              <OperationRoomCard
+                op={op}
+                date={ddmmyy}
+                refresh={refresh}
+                setRefresh={setRefresh}
+              />
             </Grid>
           );
         })}
