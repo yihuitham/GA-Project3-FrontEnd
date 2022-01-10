@@ -9,11 +9,47 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import { Box } from '@mui/system';
 import { FetchContext } from '../context/FetchContext';
+import NewPatient from '../components/NewPatient';
 
 export default function PatientOverview() {
   const [patientData, setPatientData] = useState([]);
   const fetchContext = useContext(FetchContext);
+  const [openNewModal, setOpenNewModal] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+
+  const handleRefresh = () => {
+    if (refresh) {
+      setRefresh(false);
+    } else {
+      setRefresh(true);
+    }
+  };
+
+  const handleNewOpen = () => {
+    setOpenNewModal(true);
+    handleRefresh();
+  };
+
+  const handleNewClose = () => {
+    setOpenNewModal(false);
+    handleRefresh();
+  };
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '76vw',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    borderRadius: 2,
+    p: 2,
+  };
 
   useEffect(async () => {
     const getPatientData = async () => {
@@ -25,8 +61,8 @@ export default function PatientOverview() {
       }
     };
     getPatientData();
-  }, []);
-  console.log('Patient', patientData);
+  }, [refresh]);
+  console.log('refresh', refresh);
 
   return (
     <Paper
@@ -38,6 +74,27 @@ export default function PatientOverview() {
         m: 2,
       }}
     >
+      <Modal
+        open={openNewModal}
+        onClose={handleNewClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box sx={modalStyle}>
+          <NewPatient
+            handleNewClose={handleNewClose}
+            handleRefresh={handleRefresh}
+          />
+        </Box>
+      </Modal>
+      <Button
+        variant='outlined'
+        onClick={(event) => {
+          handleNewOpen();
+        }}
+      >
+        New
+      </Button>
       <TableContainer>
         <Table stickyHeader aria-label='patient table'>
           <TableHead>
