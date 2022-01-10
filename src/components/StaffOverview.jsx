@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Button from '@mui/material/Button';
-import { Box } from '@mui/system';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Modal from '@mui/material/Modal';
 import EditStaff from '../components/EditStaff';
@@ -19,7 +19,6 @@ export default function PatientOverview() {
   const fetchContext = useContext(FetchContext);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openNewModal, setOpenNewModal] = useState(false);
-  const [openResponseModal, setResponseModal] = useState(false);
   const [singleStaffData, setSingleStaffData] = useState('');
   const [refresh, setRefresh] = useState(false);
 
@@ -98,7 +97,6 @@ export default function PatientOverview() {
             data={singleStaffData}
             handleEditClose={handleEditClose}
             setRefresh={setRefresh}
-            refresh={refresh}
             handleRefresh={handleRefresh}
           />
         </Box>
@@ -118,14 +116,6 @@ export default function PatientOverview() {
           />
         </Box>
       </Modal>
-      <Button
-        variant='outlined'
-        onClick={(event) => {
-          handleNewOpen();
-        }}
-      >
-        New
-      </Button>
       <TableContainer>
         <Table stickyHeader aria-label='patient table'>
           <TableHead>
@@ -172,6 +162,14 @@ export default function PatientOverview() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Fab
+        size='medium'
+        aria-label='add'
+        onClick={handleNewOpen}
+        sx={{ position: 'absolute', bottom: 0, right: 0, m: 6 }}
+      >
+        <AddIcon fontSize='medium' />
+      </Fab>
     </Paper>
   );
 }

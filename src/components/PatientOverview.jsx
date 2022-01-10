@@ -1,7 +1,4 @@
-import axios from 'axios';
-import { publicFetch } from './../util/fetch';
 import React, { useEffect, useState, useContext } from 'react';
-import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,7 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 import Modal from '@mui/material/Modal';
 import { Box } from '@mui/system';
 import { FetchContext } from '../context/FetchContext';
@@ -113,14 +111,7 @@ export default function PatientOverview() {
           />
         </Box>
       </Modal>
-      <Button
-        variant='outlined'
-        onClick={(event) => {
-          handleNewOpen();
-        }}
-      >
-        New
-      </Button>
+
       <TableContainer>
         <Table stickyHeader aria-label='patient table'>
           <TableHead>
@@ -164,6 +155,14 @@ export default function PatientOverview() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Fab
+        size='medium'
+        aria-label='add'
+        onClick={handleNewOpen}
+        sx={{ position: 'absolute', bottom: 0, right: 0, m: 6 }}
+      >
+        <AddIcon fontSize='medium' />
+      </Fab>
     </Paper>
   );
 }

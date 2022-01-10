@@ -1,16 +1,7 @@
-import React, { useState, useContext } from 'react';
-
-import {
-  Box,
-  TextField,
-  createTheme,
-  ThemeProvider,
-  CssBaseline,
-  Grid,
-  Button,
-  Typography,
-  Paper,
-} from '@mui/material';
+import React from 'react';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 export default function ResponseModal({
   response,

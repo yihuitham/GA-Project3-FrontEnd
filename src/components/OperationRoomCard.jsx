@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -10,10 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Modal from '@mui/material/Modal';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Fab from '@mui/material/Fab';
 import { styled } from '@mui/styles';
-import { FetchContext } from '../context/FetchContext';
 import NewOperation from './NewOperation';
 import ViewSchedule from './ViewSchedule';
 
@@ -73,7 +70,6 @@ const modalStyle = {
 };
 
 function OperationRoomCard({ op, date, setRefresh }) {
-  const fetchContext = useContext(FetchContext);
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -82,21 +78,6 @@ function OperationRoomCard({ op, date, setRefresh }) {
   const handleClose = () => {
     setOpen(false);
     setRefresh(false);
-  };
-
-  const deleteOperation = async () => {
-    try {
-      const response = await fetchContext.authAxios.delete(
-        `/operation/${op._id}`
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleDelete = () => {
-    deleteOperation();
-    handleClose();
   };
 
   return (
@@ -115,19 +96,6 @@ function OperationRoomCard({ op, date, setRefresh }) {
                 currentID={op._id}
                 closeViewSchedule={handleClose}
               />
-              <Fab
-                size='medium'
-                aria-label='delete'
-                sx={{
-                  position: 'absolute',
-                  bottom: -80,
-                  right: 0,
-                  m: 2,
-                }}
-                onClick={handleDelete}
-              >
-                <DeleteIcon />
-              </Fab>
             </>
           ) : (
             <NewOperation

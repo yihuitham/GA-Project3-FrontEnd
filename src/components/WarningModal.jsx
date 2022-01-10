@@ -1,16 +1,7 @@
-import React, { useState, useContext } from 'react';
-
-import {
-  Box,
-  TextField,
-  createTheme,
-  ThemeProvider,
-  CssBaseline,
-  Grid,
-  Button,
-  Typography,
-  Paper,
-} from '@mui/material';
+import React from 'react';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
 
 export default function WarningModal({ response, handleDeleteSubmit }) {
   const handleSubmit = () => {

@@ -4,11 +4,10 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { OperationRoomCard } from './OperationRoomCard';
 import Grid from '@mui/material/Grid';
-import { Box } from '@mui/system';
-import { Paper } from '@mui/material';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 
 export default function ScheduleOverview() {
   let operationRes = [];

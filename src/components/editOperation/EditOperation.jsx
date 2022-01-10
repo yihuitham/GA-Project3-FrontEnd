@@ -114,7 +114,7 @@ export default function EditOperation({
               <TableCell>Operation Description </TableCell>
               <TableCell>
                 <TextField
-                  inputProps={{ style: { fontSize: 14 } }}
+                  inputProps={{ style: { fontSize: '0.875rem' } }}
                   size='small'
                   variant='standard'
                   value={data.operation}

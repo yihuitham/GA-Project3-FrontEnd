@@ -6,17 +6,9 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Modal from '@mui/material/Modal';
-import {
-  Box,
-  TextField,
-  createTheme,
-  ThemeProvider,
-  CssBaseline,
-  Grid,
-  Button,
-  Typography,
-  Paper,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -43,27 +35,13 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
   const [response, setResponse] = useState(null);
 
   const allergyList = [
-    {
-      allergy: 'Drug',
-    },
-    {
-      allergy: 'Food',
-    },
-    {
-      allergy: 'Insect',
-    },
-    {
-      allergy: 'Latex',
-    },
-    {
-      allergy: 'Mold',
-    },
-    {
-      allergy: 'Pet',
-    },
-    {
-      allergy: 'Pollen',
-    },
+    'Drug',
+    'Food',
+    'Insect',
+    'Latex',
+    'Mold',
+    'Pet',
+    'Pollen',
   ];
 
   const addPatient = async () => {
@@ -218,7 +196,8 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
                   labelId='select-gender'
                   id='select-gender'
                   value={gender}
-                  label=''
+                  variant='standard'
+                  sx={{ width: 350 }}
                   onChange={handleGenderChange}
                 >
                   <MenuItem value={'F'}>Female</MenuItem>
@@ -249,14 +228,19 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
                 <Select
                   labelId='select-blood'
                   id='select-blood'
+                  variant='standard'
                   value={bloodType}
-                  label=''
                   onChange={handleBloodChange}
+                  sx={{ width: 350 }}
                 >
-                  <MenuItem value={'A'}>A</MenuItem>
-                  <MenuItem value={'B'}>B</MenuItem>
-                  <MenuItem value={'AB'}>AB</MenuItem>
-                  <MenuItem value={'O'}>O</MenuItem>
+                  <MenuItem value={'A+'}>A+</MenuItem>
+                  <MenuItem value={'A-'}>A-</MenuItem>
+                  <MenuItem value={'B+'}>B+</MenuItem>
+                  <MenuItem value={'B-'}>B-</MenuItem>
+                  <MenuItem value={'AB+'}>AB+</MenuItem>
+                  <MenuItem value={'AB-'}>AB-</MenuItem>
+                  <MenuItem value={'O+'}>O+</MenuItem>
+                  <MenuItem value={'O-'}>O-</MenuItem>
                 </Select>
               </TableCell>
             </TableRow>
@@ -270,10 +254,7 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
                   options={allergyList}
                   disableCloseOnSelect
                   autoHighlight
-                  getOptionLabel={(option) => option.allergy}
-                  isOptionEqualToValue={(option, value) =>
-                    option.allergy === value.allergy
-                  }
+                  getOptionLabel={(option) => option}
                   onChange={(event, value) => handleAllergyChange(value)}
                   renderOption={(props, option, { selected }) => (
                     <li {...props}>
@@ -283,10 +264,10 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
                         style={{ marginRight: 8 }}
                         checked={selected}
                       />
-                      {option.allergy}
+                      {option}
                     </li>
                   )}
-                  style={{ width: 500 }}
+                  sx={{ width: 350 }}
                   renderInput={(params) => (
                     <TextField {...params} variant='standard' />
                   )}
@@ -301,7 +282,8 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
                   id='input'
                   multiline
                   maxRows={4}
-                  variant='outlined'
+                  variant='standard'
+                  sx={{ width: 350 }}
                   onChange={(e) => setMedicalCondition(e.target.value)}
                 />
               </TableCell>

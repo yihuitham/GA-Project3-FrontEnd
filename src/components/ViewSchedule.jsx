@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -6,12 +6,14 @@ import { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Fab from '@mui/material/Fab';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import ViewOperation from '../components/ViewOperation';
 import ViewPatient from '../components/ViewPatient';
 import EditOperation from './editOperation/EditOperation';
+import { FetchContext } from '../context/FetchContext';
 
 const modalStyle = {
   position: 'absolute',
@@ -30,10 +32,25 @@ export default function ViewSchedule({
   currentID,
   closeViewSchedule,
 }) {
+  const fetchContext = useContext(FetchContext);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleDelete = () => {
+    deleteOperation();
+    closeViewSchedule();
+  };
+
+  const deleteOperation = async () => {
+    try {
+      const response = await fetchContext.authAxios.delete(
+        `/operation/${operationData._id}`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -68,11 +85,7 @@ export default function ViewSchedule({
           </TableBody>
         </Table>
       </TableContainer>
-
-      <Fab
-        size='medium'
-        aria-label='edit'
-        onClick={handleOpen}
+      <Box
         sx={{
           position: 'absolute',
           bottom: 0,
@@ -80,8 +93,18 @@ export default function ViewSchedule({
           m: 2,
         }}
       >
-        <EditIcon />
-      </Fab>
+        <Fab
+          size='medium'
+          aria-label='edit'
+          onClick={handleOpen}
+          sx={{ mr: 2 }}
+        >
+          <EditIcon />
+        </Fab>
+        <Fab size='medium' aria-label='delete' onClick={handleDelete}>
+          <DeleteIcon />
+        </Fab>
+      </Box>
       <Modal
         open={open}
         onClose={handleClose}

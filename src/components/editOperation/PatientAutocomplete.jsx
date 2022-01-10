@@ -48,7 +48,8 @@ export default function PatientAutocomplete({
         <TextField
           {...params}
           variant='standard'
-          style={{ width: 350, fontSize: 14 }}
+          style={{ width: 350 }}
+          inputProps={{ ...params.inputProps, style: { fontSize: '0.875rem' } }}
         />
       )}
     />

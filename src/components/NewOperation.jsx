@@ -14,7 +14,6 @@ import SurgeonsTags from './SurgeonsTags';
 import PatientAutocomplete from './PatientAutocomplete';
 import PatientDetailsOnSelect from './PatientDetailsOnSelect';
 import { FetchContext } from '../context/FetchContext';
-import { Typography } from '@mui/material';
 
 export default function NewOperation({ operationData, date, handleClose }) {
   const data = operationData;

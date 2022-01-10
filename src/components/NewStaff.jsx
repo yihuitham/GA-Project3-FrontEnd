@@ -2,17 +2,9 @@ import React, { useState, useContext } from 'react';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Modal from '@mui/material/Modal';
-import {
-  Box,
-  TextField,
-  createTheme,
-  ThemeProvider,
-  CssBaseline,
-  Grid,
-  Button,
-  Typography,
-  Paper,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -210,7 +202,8 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
                   labelId='select-role'
                   id='select-role'
                   value={role}
-                  label=''
+                  variant='standard'
+                  sx={{ width: 350, fontSize: 14 }}
                   onChange={handleRoleChange}
                 >
                   <MenuItem value={'Chief'}>Chief</MenuItem>
@@ -227,7 +220,8 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
                   labelId='select-gender'
                   id='select-gender'
                   value={gender}
-                  label=''
+                  variant='standard'
+                  sx={{ width: 350, fontSize: 14 }}
                   onChange={handleGenderChange}
                 >
                   <MenuItem value={'F'}>Female</MenuItem>
@@ -260,7 +254,8 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
                   labelId='select-speciality'
                   id='select-speciality'
                   value={speciality}
-                  label=''
+                  variant='standard'
+                  sx={{ width: 350, fontSize: 14 }}
                   onChange={handleSpecialityChange}
                 >
                   <MenuItem value={'General'}>General</MenuItem>

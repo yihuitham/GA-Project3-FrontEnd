@@ -3,10 +3,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { FetchContext } from '../context/FetchContext';
 
-export default function PatientAutocomplete({
-  selectedPatient,
-  setSelectedPatient,
-}) {
+export default function PatientAutocomplete({ setSelectedPatient }) {
   const fetchContext = useContext(FetchContext);
   const [patients, setPatients] = useState([]);
 
@@ -43,7 +40,12 @@ export default function PatientAutocomplete({
         setSelectedPatient(value);
       }}
       renderInput={(params) => (
-        <TextField {...params} variant='standard' style={{ width: 350 }} />
+        <TextField
+          {...params}
+          variant='standard'
+          style={{ width: 350 }}
+          inputProps={{ ...params.inputProps, style: { fontSize: '0.875rem' } }}
+        />
       )}
     />
   );

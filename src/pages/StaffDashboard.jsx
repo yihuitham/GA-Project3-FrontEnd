@@ -18,6 +18,7 @@ import TableContainer from '@mui/material/TableContainer';
 import ViewOperation from '../components/ViewOperation';
 import ViewPatient from '../components/ViewPatient';
 import ViewReport from '../components/ViewReport';
+import { Typography } from '@mui/material';
 
 let theme = createTheme({
   components: {
@@ -136,7 +137,7 @@ export default function StaffDashboard() {
                 bgcolor: '#ededed',
               }}
             >
-              <Paper sx={{ m: 2, p: 2, maxHeight: '75vh', overflow: 'auto' }}>
+              <Paper sx={{ m: 2, p: 2, maxHeight: '80vh', overflow: 'auto' }}>
                 {console.log(
                   'operation data from staffdashboard',
                   operationData
@@ -155,21 +156,27 @@ export default function StaffDashboard() {
                     <TableBody>
                       {operationData === undefined ||
                       operationData.message === 'Not found' ? (
-                        '-'
+                        <Box
+                          sx={{
+                            height: '63vh',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Typography sx={{ textAlign: 'center' }}>
+                            No operation scheduled on this day. {<br />}Take a
+                            nice break!
+                          </Typography>
+                        </Box>
                       ) : (
-                        <ViewOperation operationData={operationData} />
-                      )}
-                      {operationData === undefined ||
-                      operationData.message === 'Not found' ? (
-                        '-'
-                      ) : (
-                        <ViewPatient operationData={operationData.patientID} />
-                      )}
-                      {operationData === undefined ||
-                      operationData.message === 'Not found' ? (
-                        '-'
-                      ) : (
-                        <ViewReport operationData={operationData} />
+                        <>
+                          <ViewOperation operationData={operationData} />
+                          <ViewPatient
+                            operationData={operationData.patientID}
+                          />
+                          <ViewReport operationData={operationData} />
+                        </>
                       )}
                     </TableBody>
                   </Table>
