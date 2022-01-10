@@ -351,14 +351,14 @@ export default function EditStaff({
       >
         <SaveIcon fontSize='medium' />
       </Fab>
-      <IconButton
-        size='large'
-        aria-label='delete'
+      <Fab
+        size='medium'
+        aria-label='edit'
         onClick={handleWarningOpen}
         sx={{ position: 'absolute', bottom: 0, right: 0, m: 2 }}
       >
         <DeleteIcon />
-      </IconButton>
+      </Fab>
     </Paper>
   );
 }
