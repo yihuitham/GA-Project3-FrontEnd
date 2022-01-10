@@ -14,10 +14,13 @@ import Modal from '@mui/material/Modal';
 import { Box } from '@mui/system';
 import { FetchContext } from '../context/FetchContext';
 import NewPatient from '../components/NewPatient';
+import EditPatient from '../components/EditPatient';
 
 export default function PatientOverview() {
   const [patientData, setPatientData] = useState([]);
+  const [singlePatientData, setSinglePatientData] = useState('');
   const fetchContext = useContext(FetchContext);
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [openNewModal, setOpenNewModal] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
@@ -27,6 +30,16 @@ export default function PatientOverview() {
     } else {
       setRefresh(true);
     }
+  };
+
+  const handleEditOpen = () => {
+    setOpenEditModal(true);
+    handleRefresh();
+  };
+
+  const handleEditClose = () => {
+    setOpenEditModal(false);
+    handleRefresh();
   };
 
   const handleNewOpen = () => {
@@ -62,7 +75,6 @@ export default function PatientOverview() {
     };
     getPatientData();
   }, [refresh]);
-  console.log('refresh', refresh);
 
   return (
     <Paper
@@ -74,6 +86,20 @@ export default function PatientOverview() {
         m: 2,
       }}
     >
+      <Modal
+        open={openEditModal}
+        onClose={handleEditClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box sx={modalStyle}>
+          <EditPatient
+            data={singlePatientData}
+            handleEditClose={handleEditClose}
+            handleRefresh={handleRefresh}
+          />
+        </Box>
+      </Modal>
       <Modal
         open={openNewModal}
         onClose={handleNewClose}
@@ -119,8 +145,10 @@ export default function PatientOverview() {
             {patientData.map((patient) => (
               <TableRow
                 hover
-                onClick={(event) => console.log(patient._id)}
-                key={patient.name}
+                onClick={(event) => {
+                  handleEditOpen();
+                  setSinglePatientData(patient);
+                }}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component='th' scope='row'>
