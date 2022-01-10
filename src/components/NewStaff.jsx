@@ -81,7 +81,6 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
 
   const handleSubmit = () => {
     addStaff();
-    // handleClose();
     handleResponseOpen();
   };
 
@@ -96,15 +95,7 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
   const handleSpecialityChange = (e) => {
     setSpeciality(e.target.value);
   };
-  //   console.log('loginID', loginID);
-  //   console.log('password', password);
-  //   console.log('name', name);
-  //   console.log('nric', NRIC);
-  //   console.log('role', role);
-  //   console.log('gender', gender);
-  //   console.log('contact', contact);
-  //   console.log('speciality', speciality);
-  console.log('response', response);
+
   return (
     <Paper
       sx={{
@@ -129,7 +120,7 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
         <Box sx={modalStyle}>
           <ResponseModal
             response={response}
-            handleClose={handleResponseClose}
+            handleResponseClose={handleResponseClose}
             handleRefresh={handleRefresh}
           />
         </Box>
