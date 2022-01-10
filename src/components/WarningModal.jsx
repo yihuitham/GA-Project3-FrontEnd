@@ -32,7 +32,7 @@ export default function WarningModal({ response, handleDeleteSubmit }) {
       }}
       elevation={0}
     >
-      <Typography>Are you sure to delete this staff account?</Typography>
+      <Typography>Are you sure to delete this id?</Typography>
       <Button variant='outlined' onClick={handleSubmit}>
         Ok
       </Button>

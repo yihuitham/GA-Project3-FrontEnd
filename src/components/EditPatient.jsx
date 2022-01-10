@@ -90,17 +90,17 @@ export default function EditPatient({ data, handleEditClose, handleRefresh }) {
     }
   };
 
-  //   const deleteStaff = async () => {
-  //     try {
-  //       const response = await fetchContext.authAxios.delete(
-  //         `/staff/delete/${data._id}`
-  //       );
-  //       setResponse(response.data.message);
-  //     } catch (error) {
-  //       console.log(error);
-  //       setResponse(error.response.data.message);
-  //     }
-  //   };
+  const deletePatient = async () => {
+    try {
+      const response = await fetchContext.authAxios.delete(
+        `/patient/delete/${data._id}`
+      );
+      setResponse(response.data.message);
+    } catch (error) {
+      console.log(error);
+      setResponse(error.response.data.message);
+    }
+  };
 
   const modalStyle = {
     position: 'absolute',
@@ -154,10 +154,10 @@ export default function EditPatient({ data, handleEditClose, handleRefresh }) {
     setAllergy(allergyArray);
   };
 
-  //   const handleDeleteSubmit = () => {
-  //     deleteStaff();
-  //     handleWarningClose();
-  //   };
+  const handleDeleteSubmit = () => {
+    deletePatient();
+    handleWarningClose();
+  };
   console.log('allergy', allergy);
   return (
     <Paper
@@ -195,7 +195,11 @@ export default function EditPatient({ data, handleEditClose, handleRefresh }) {
         aria-describedby='modal-modal-description'
       >
         <Box sx={modalStyle}>
-          <WarningModal response={response} handleRefresh={handleRefresh} />
+          <WarningModal
+            response={response}
+            handleRefresh={handleRefresh}
+            handleDeleteSubmit={handleDeleteSubmit}
+          />
         </Box>
       </Modal>
       <TableContainer>
