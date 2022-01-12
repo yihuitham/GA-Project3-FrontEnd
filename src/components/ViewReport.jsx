@@ -10,8 +10,6 @@ export default function FormPropsTextFields({ operationData }) {
   const data = operationData;
   const fetchContext = useContext(FetchContext);
 
-  const [editButton, setEditButton] = useState(true);
-  const [saveButton, setSaveButton] = useState(false);
   const [read, setRead] = useState(true);
   const [input, setInput] = useState('');
   const [report, setReport] = useState('');

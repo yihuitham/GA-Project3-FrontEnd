@@ -27,7 +27,7 @@ const checkedIcon = <CheckBoxIcon fontSize='small' />;
 export default function EditPatient({ data, handleEditClose, handleRefresh }) {
   const fetchContext = useContext(FetchContext);
   const [name, setName] = useState(data.name);
-  const [nric, setNric] = useState(data.nric);
+  const nric = data.nric;
   const [gender, setGender] = useState(data.gender);
   const [age, setAge] = useState(data.age);
   const [bloodType, setBloodType] = useState(data.bloodType);
@@ -146,7 +146,6 @@ export default function EditPatient({ data, handleEditClose, handleRefresh }) {
         flex: 1,
         m: 0,
         borderRadius: 2,
-        display: 'flex',
         flexDirection: 'column',
       }}
       elevation={0}

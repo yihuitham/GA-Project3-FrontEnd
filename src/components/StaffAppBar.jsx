@@ -31,6 +31,9 @@ export default function StaffAppBar() {
       break;
     case 'Chief':
       title = 'Chief Dr.';
+      break;
+    default:
+      title = '';
   }
   return (
     <ThemeProvider theme={theme}>

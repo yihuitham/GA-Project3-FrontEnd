@@ -27,7 +27,6 @@ const AdminRoute = () => {
 };
 
 const AppRoutes = () => {
-  const authContext = useContext(AuthContext);
   return (
     <>
       <Routes>

@@ -11,7 +11,7 @@ const checkedIcon = <CheckBoxIcon fontSize='small' />;
 
 export default function Nursestags({ setSelectedNurses, currentNurses }) {
   const fetchContext = useContext(FetchContext);
-  const [value, setValue] = useState(currentNurses);
+  const value = currentNurses;
   const [nurses, setNurses] = useState([]);
 
   useEffect(() => {

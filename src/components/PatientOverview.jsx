@@ -62,7 +62,7 @@ export default function PatientOverview() {
     p: 2,
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     const getPatientData = async () => {
       try {
         const response = await fetchContext.authAxios.get(`patient/all`);

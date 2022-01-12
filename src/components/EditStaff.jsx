@@ -25,12 +25,12 @@ export default function EditStaff({
 }) {
   const fetchContext = useContext(FetchContext);
   const [name, setName] = useState(data.name);
-  const [NRIC, setNRIC] = useState(data.NRIC);
+  const NRIC = data.NRIC;
   const [role, setRole] = useState(data.role);
   const [gender, setGender] = useState(data.gender);
   const [contact, setContact] = useState(data.contact);
   const [speciality, setSpeciality] = useState(data.speciality);
-  const [staffID, setStaffID] = useState(data.staff_id);
+  const staffID = data.staff_id;
   const [response, setResponse] = useState(null);
   const [openResponseModal, setResponseModal] = useState(false);
   const [openWarningModal, setWarningModal] = useState(false);
@@ -69,7 +69,7 @@ export default function EditStaff({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '76vw',
+    width: '70vw',
     bgcolor: 'background.paper',
     boxShadow: 24,
     borderRadius: 2,
@@ -120,20 +120,7 @@ export default function EditStaff({
   };
 
   return (
-    <Paper
-      sx={{
-        maxHeight: '80vh',
-        overflow: 'auto',
-        maxWidth: '76vw',
-        display: 'flex',
-        flex: 1,
-        m: 0,
-        borderRadius: 2,
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-      elevation={0}
-    >
+    <>
       <Modal
         open={openResponseModal}
         onClose={handleResponseClose}
@@ -156,168 +143,180 @@ export default function EditStaff({
       >
         <Box sx={modalStyle}>
           <WarningModal
-            response={response}
+            setWarningModal={setWarningModal}
             handleDeleteSubmit={handleDeleteSubmit}
-            setRefresh={setRefresh}
           />
         </Box>
       </Modal>
-      <TableContainer>
-        <Table
-          stickyHeader
-          aria-label='view table'
-          sx={{
-            [`& .${tableCellClasses.root}`]: {
-              borderBottom: 'none',
-              p: 0.8,
-            },
-          }}
-        >
-          <TableBody>
-            <TableRow>
-              <TableCell sx={{ color: '#4682B4', fontWeight: '600' }}>
-                Staff Details
-              </TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>
-                <TextField
-                  inputProps={{ style: { fontSize: 14 } }}
-                  size='small'
-                  variant='standard'
-                  sx={{ width: 350 }}
-                  defaultValue={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                />
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align='center'> </TableCell>
-              <TableCell>NRIC</TableCell>
-              <TableCell>
-                <TextField
-                  inputProps={{ style: { fontSize: 14 }, readOnly: true }}
-                  size='small'
-                  variant='standard'
-                  sx={{ width: 350 }}
-                  defaultValue={NRIC}
-                />
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align='center'> </TableCell>
-              <TableCell>Staff ID</TableCell>
-              <TableCell>
-                <TextField
-                  inputProps={{ style: { fontSize: 14 }, readOnly: true }}
-                  size='small'
-                  variant='standard'
-                  sx={{ width: 350 }}
-                  defaultValue={staffID}
-                />
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align='center'> </TableCell>
-              <TableCell>Role</TableCell>
-              <TableCell>
-                <Select
-                  labelId='select-role'
-                  id='select-role'
-                  value={role}
-                  variant='standard'
-                  sx={{ width: 350, fontSize: 14 }}
-                  onChange={handleRoleChange}
-                >
-                  <MenuItem value={'Chief'}>Chief</MenuItem>
-                  <MenuItem value={'Surgeon'}>Surgeon</MenuItem>
-                  <MenuItem value={'Nurse'}>Nurse</MenuItem>
-                </Select>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align='center'> </TableCell>
-              <TableCell>Gender</TableCell>
-              <TableCell>
-                <Select
-                  labelId='select-gender'
-                  id='select-gender'
-                  value={gender}
-                  variant='standard'
-                  sx={{ width: 350, fontSize: 14 }}
-                  onChange={handleGenderChange}
-                >
-                  <MenuItem value={'F'}>Female</MenuItem>
-                  <MenuItem value={'M'}>Male</MenuItem>
-                  <MenuItem value={'O'}>Others</MenuItem>
-                </Select>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align='center'> </TableCell>
-              <TableCell>Contact No.</TableCell>
-              <TableCell>
-                <TextField
-                  inputProps={{ style: { fontSize: 14 } }}
-                  size='small'
-                  variant='standard'
-                  sx={{ width: 350 }}
-                  defaultValue={contact}
-                  onChange={(e) => {
-                    setContact(e.target.value);
-                  }}
-                />
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align='center'> </TableCell>
-              <TableCell>Speciality</TableCell>
-              <TableCell>
-                <Select
-                  labelId='select-speciality'
-                  id='select-speciality'
-                  value={speciality}
-                  variant='standard'
-                  sx={{ width: 350, fontSize: 14 }}
-                  onChange={handleSpecialityChange}
-                >
-                  <MenuItem value={'General'}>General</MenuItem>
-                  <MenuItem value={'Urology'}>Urology</MenuItem>
-                  <MenuItem value={'Neurological'}>Neurological</MenuItem>
-                  <MenuItem value={'Thoracic'}>Thoracic</MenuItem>
-                  <MenuItem value={'Cardiologists'}>Cardiologists</MenuItem>
-                  <MenuItem value={'Orthopaedic'}>Orthopaedic</MenuItem>
-                  <MenuItem value={'Oral and Maxillofacial'}>
-                    Oral and Maxillofacial
-                  </MenuItem>
-                  <MenuItem value={'Cophthalmic'}>Cophthalmic</MenuItem>
-                  <MenuItem value={'Gynecologic Oncology'}>
-                    Gynecologic Oncology
-                  </MenuItem>
-                  <MenuItem value={'Colon and Rectal'}>
-                    Colon and Rectal
-                  </MenuItem>
-                </Select>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align='center'> </TableCell>
-              <TableCell>Login ID</TableCell>
-              <TableCell>
-                <TextField
-                  inputProps={{ style: { fontSize: 14 }, readOnly: true }}
-                  size='small'
-                  variant='standard'
-                  sx={{ width: 350 }}
-                  defaultValue={data.loginID}
-                  onChange={(e) => {
-                    setContact(e.target.value);
-                  }}
-                />
-              </TableCell>
-            </TableRow>
-            {/* <TableRow>
+      <Paper
+        sx={{
+          maxHeight: '80vh',
+          overflow: 'auto',
+          maxWidth: '76vw',
+          display: 'flex',
+          flex: 1,
+          m: 0,
+          borderRadius: 2,
+          flexDirection: 'column',
+        }}
+        elevation={0}
+      >
+        <TableContainer>
+          <Table
+            stickyHeader
+            aria-label='view table'
+            sx={{
+              [`& .${tableCellClasses.root}`]: {
+                borderBottom: 'none',
+                p: 0.8,
+              },
+            }}
+          >
+            <TableBody>
+              <TableRow>
+                <TableCell sx={{ color: '#4682B4', fontWeight: '600' }}>
+                  Staff Details
+                </TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>
+                  <TextField
+                    inputProps={{ style: { fontSize: 14 } }}
+                    size='small'
+                    variant='standard'
+                    sx={{ width: 350 }}
+                    defaultValue={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                  />
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell align='center'> </TableCell>
+                <TableCell>NRIC</TableCell>
+                <TableCell>
+                  <TextField
+                    inputProps={{ style: { fontSize: 14 }, readOnly: true }}
+                    size='small'
+                    variant='standard'
+                    sx={{ width: 350 }}
+                    defaultValue={NRIC}
+                  />
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell align='center'> </TableCell>
+                <TableCell>Staff ID</TableCell>
+                <TableCell>
+                  <TextField
+                    inputProps={{ style: { fontSize: 14 }, readOnly: true }}
+                    size='small'
+                    variant='standard'
+                    sx={{ width: 350 }}
+                    defaultValue={staffID}
+                  />
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell align='center'> </TableCell>
+                <TableCell>Role</TableCell>
+                <TableCell>
+                  <Select
+                    labelId='select-role'
+                    id='select-role'
+                    value={role}
+                    variant='standard'
+                    sx={{ width: 350, fontSize: 14 }}
+                    onChange={handleRoleChange}
+                  >
+                    <MenuItem value={'Chief'}>Chief</MenuItem>
+                    <MenuItem value={'Surgeon'}>Surgeon</MenuItem>
+                    <MenuItem value={'Nurse'}>Nurse</MenuItem>
+                  </Select>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell align='center'> </TableCell>
+                <TableCell>Gender</TableCell>
+                <TableCell>
+                  <Select
+                    labelId='select-gender'
+                    id='select-gender'
+                    value={gender}
+                    variant='standard'
+                    sx={{ width: 350, fontSize: 14 }}
+                    onChange={handleGenderChange}
+                  >
+                    <MenuItem value={'F'}>Female</MenuItem>
+                    <MenuItem value={'M'}>Male</MenuItem>
+                    <MenuItem value={'O'}>Others</MenuItem>
+                  </Select>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell align='center'> </TableCell>
+                <TableCell>Contact No.</TableCell>
+                <TableCell>
+                  <TextField
+                    inputProps={{ style: { fontSize: 14 } }}
+                    size='small'
+                    variant='standard'
+                    sx={{ width: 350 }}
+                    defaultValue={contact}
+                    onChange={(e) => {
+                      setContact(e.target.value);
+                    }}
+                  />
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell align='center'> </TableCell>
+                <TableCell>Speciality</TableCell>
+                <TableCell>
+                  <Select
+                    labelId='select-speciality'
+                    id='select-speciality'
+                    value={speciality}
+                    variant='standard'
+                    sx={{ width: 350, fontSize: 14 }}
+                    onChange={handleSpecialityChange}
+                  >
+                    <MenuItem value={'General'}>General</MenuItem>
+                    <MenuItem value={'Urology'}>Urology</MenuItem>
+                    <MenuItem value={'Neurological'}>Neurological</MenuItem>
+                    <MenuItem value={'Thoracic'}>Thoracic</MenuItem>
+                    <MenuItem value={'Cardiologists'}>Cardiologists</MenuItem>
+                    <MenuItem value={'Orthopaedic'}>Orthopaedic</MenuItem>
+                    <MenuItem value={'Oral and Maxillofacial'}>
+                      Oral and Maxillofacial
+                    </MenuItem>
+                    <MenuItem value={'Cophthalmic'}>Cophthalmic</MenuItem>
+                    <MenuItem value={'Gynecologic Oncology'}>
+                      Gynecologic Oncology
+                    </MenuItem>
+                    <MenuItem value={'Colon and Rectal'}>
+                      Colon and Rectal
+                    </MenuItem>
+                  </Select>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell align='center'> </TableCell>
+                <TableCell>Login ID</TableCell>
+                <TableCell>
+                  <TextField
+                    inputProps={{ style: { fontSize: 14 }, readOnly: true }}
+                    size='small'
+                    variant='standard'
+                    sx={{ width: 350 }}
+                    defaultValue={data.loginID}
+                    onChange={(e) => {
+                      setContact(e.target.value);
+                    }}
+                  />
+                </TableCell>
+              </TableRow>
+              {/* <TableRow>
               <TableCell align='center'> </TableCell>
               <TableCell>Password</TableCell>
               <TableCell>
@@ -333,25 +332,26 @@ export default function EditStaff({
                 />
               </TableCell>
             </TableRow> */}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Fab
-        size='medium'
-        aria-label='edit'
-        onClick={handleSubmit}
-        sx={{ position: 'absolute', bottom: 0, right: 70, m: 2 }}
-      >
-        <SaveIcon fontSize='medium' />
-      </Fab>
-      <Fab
-        size='medium'
-        aria-label='edit'
-        onClick={handleWarningOpen}
-        sx={{ position: 'absolute', bottom: 0, right: 0, m: 2 }}
-      >
-        <DeleteIcon />
-      </Fab>
-    </Paper>
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Fab
+          size='medium'
+          aria-label='edit'
+          onClick={handleSubmit}
+          sx={{ position: 'absolute', bottom: 0, right: 70, m: 2 }}
+        >
+          <SaveIcon fontSize='medium' />
+        </Fab>
+        <Fab
+          size='medium'
+          aria-label='edit'
+          onClick={handleWarningOpen}
+          sx={{ position: 'absolute', bottom: 0, right: 0, m: 2 }}
+        >
+          <DeleteIcon />
+        </Fab>
+      </Paper>
+    </>
   );
 }

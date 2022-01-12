@@ -11,7 +11,7 @@ const checkedIcon = <CheckBoxIcon fontSize='small' />;
 
 export default function SurgeonsTags({ setSelectedSurgeons, currentSurgeons }) {
   const fetchContext = useContext(FetchContext);
-  const [value, setValue] = useState(currentSurgeons);
+  const value = currentSurgeons;
   const [surgeons, setSurgeons] = useState([]);
 
   useEffect(() => {

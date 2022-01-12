@@ -41,7 +41,7 @@ export default function ScheduleOverview() {
     setOperation(operationRes);
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     getOperationData(ddmmyy);
   }, [refresh]);
 

@@ -1,15 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
-import {
-  Box,
-  TextField,
-  createTheme,
-  ThemeProvider,
-  CssBaseline,
-  Grid,
-  Button,
-  Typography,
-  Paper,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import { createTheme, ThemeProvider, CssBaseline } from '@mui/material';
 import Card from '@mui/material/Card';
 import StaffAppBar from '../components/StaffAppBar';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -19,7 +11,6 @@ import ScheduleOverview from '../components/ScheduleOverview';
 import PatientOverview from '../components/PatientOverview';
 import StaffOverview from '../components/StaffOverview';
 import { FetchContext } from '../context/FetchContext';
-import { AuthContext } from '../context/AuthContext';
 
 let theme = createTheme({
   components: {
@@ -93,9 +84,9 @@ export default function ChiefDashboard() {
                   justifyContent: 'center',
                 }}
               >
-                {selectedComponent == 'schedule' && <ScheduleOverview />}
-                {selectedComponent == 'staff' && <StaffOverview />}
-                {selectedComponent == 'patient' && <PatientOverview />}
+                {selectedComponent === 'schedule' && <ScheduleOverview />}
+                {selectedComponent === 'staff' && <StaffOverview />}
+                {selectedComponent === 'patient' && <PatientOverview />}
               </Grid>
             </Grid>
           </LocalizationProvider>

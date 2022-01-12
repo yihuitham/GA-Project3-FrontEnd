@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import List, { listItemClasses } from '@mui/material/List';
+import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { Typography } from '@mui/material';
 
 export default function ChiefMenu({ setSelectedComponent }) {
   const [selectedIndex, setSelectedIndex] = useState(0);

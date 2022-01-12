@@ -2,14 +2,12 @@ import React, { useState, useContext } from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import FormInput from '../components/loginForm/formInput';
-// import { AuthContext } from '../context/AuthContext';
 import { publicFetch } from './../util/fetch';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
 import {
   Box,
-  TextField,
   createTheme,
   ThemeProvider,
   CssBaseline,
@@ -47,7 +45,7 @@ export default function Login() {
   const [loginSuccess, setLoginSuccess] = useState();
   const [loginError, setLoginError] = useState();
   const [redirectOnLogin, setRedirectOnLogin] = useState(false);
-  const [loginLoading, setLoginLoading] = useState(false);
+  const setLoginLoading = false;
 
   const submitCredentials = async (credentials) => {
     try {

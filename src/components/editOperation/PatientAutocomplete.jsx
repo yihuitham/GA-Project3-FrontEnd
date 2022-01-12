@@ -10,7 +10,7 @@ export default function PatientAutocomplete({
   const fetchContext = useContext(FetchContext);
   const [patients, setPatients] = useState([]);
 
-  useEffect(async () => {
+  useEffect(() => {
     const getData = async () => {
       try {
         const response = await fetchContext.authAxios.get(`patient/all`);

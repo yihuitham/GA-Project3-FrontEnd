@@ -98,7 +98,6 @@ export default function EditStaff({ handleNewClose, handleRefresh }) {
         flex: 1,
         m: 0,
         borderRadius: 2,
-        display: 'flex',
         flexDirection: 'column',
       }}
       elevation={0}
