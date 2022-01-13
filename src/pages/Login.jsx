@@ -1,20 +1,17 @@
 import React, { useState, useContext } from 'react';
-import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import FormInput from '../components/loginForm/formInput';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import { publicFetch } from './../util/fetch';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-
-import {
-  Box,
-  createTheme,
-  ThemeProvider,
-  CssBaseline,
-  Grid,
-  Button,
-  Typography,
-} from '@mui/material';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import MainAppBar from '../components/landingPage/LoginAppBar';
 
 let theme = createTheme({
@@ -22,7 +19,6 @@ let theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          // apply theme's border-radius instead of component's default
           backgroundImage: 'radial-gradient(#FFFFFF, #5EB2FC)',
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed',
@@ -34,13 +30,12 @@ let theme = createTheme({
   },
 });
 
-const LoginSchema = Yup.object().shape({
-  loginID: Yup.string().required('Login ID is required'),
-  password: Yup.string().required('Password is required'),
+const LoginSchema = yup.object({
+  loginID: yup.string().required('Login ID is required'),
+  password: yup.string().required('Password is required'),
 });
 
 export default function Login() {
-  // console.log(theme.mixins.toolbar);
   const authContext = useContext(AuthContext);
   const [loginSuccess, setLoginSuccess] = useState();
   const [loginError, setLoginError] = useState();
@@ -51,9 +46,8 @@ export default function Login() {
     try {
       setLoginLoading(true);
       const { data } = await publicFetch.post(`authenticate`, credentials);
-      // console.log(data);
 
-      authContext.setAuthState(data); // bug here
+      authContext.setAuthState(data);
       // setLoginSuccess(data.message);
       setLoginError('');
       setTimeout(() => {
@@ -66,6 +60,17 @@ export default function Login() {
       setLoginSuccess(null);
     }
   };
+
+  const formik = useFormik({
+    initialValues: {
+      loginID: '',
+      password: '',
+    },
+    validationSchema: LoginSchema,
+    onSubmit: (values) => {
+      submitCredentials(values);
+    },
+  });
 
   return (
     <>
@@ -128,53 +133,53 @@ export default function Login() {
                 Hospital Management
               </Typography>
 
-              <Formik
-                initialValues={{
-                  loginID: '',
-                  password: '',
-                }}
-                onSubmit={(values) => submitCredentials(values)}
-                validationSchema={LoginSchema}
-              >
-                {() => (
-                  <Form>
-                    <div>
-                      {loginSuccess} {loginError}
-                    </div>
-                    <div>
-                      <div className='mb-2'>
-                        <div className='mb-1'>Login ID</div>
-                        <FormInput
-                          ariaLabel='loginID'
-                          name='loginID'
-                          type='text'
-                          placeholder='Login ID'
-                        />
-                      </div>
-                      <div>
-                        <div className='mb-1'>Password</div>
-                        <FormInput
-                          ariaLabel='Password'
-                          name='password'
-                          type='password'
-                          placeholder='Password'
-                        />
-                      </div>
-                    </div>
-                    <Button
-                      type='submit'
-                      variant='contained'
-                      sx={{
-                        m: 1,
-                        backgroundColor: '#355576',
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      Sign in
-                    </Button>
-                  </Form>
-                )}
-              </Formik>
+              <form onSubmit={formik.handleSubmit}>
+                <Stack spacing={2}>
+                  <TextField
+                    size='small'
+                    id='loginID'
+                    name='loginID'
+                    type='text'
+                    label='Login ID'
+                    variant='outlined'
+                    value={formik.values.loginID}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.loginID && Boolean(formik.errors.loginID)
+                    }
+                    helperText={formik.touched.loginID && formik.errors.loginID}
+                  />
+
+                  <TextField
+                    size='small'
+                    id='Password'
+                    name='password'
+                    type='password'
+                    label='Password'
+                    variant='outlined'
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.password && Boolean(formik.errors.password)
+                    }
+                    helperText={
+                      formik.touched.password && formik.errors.password
+                    }
+                  />
+                  {loginError}
+                  <Button
+                    type='submit'
+                    variant='contained'
+                    sx={{
+                      m: 1,
+                      backgroundColor: '#355576',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    Sign in
+                  </Button>
+                </Stack>
+              </form>
             </Box>
           </Grid>
         </Grid>
