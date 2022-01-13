@@ -28,6 +28,9 @@ Staffs can only view operations assigned to them and update post operation repor
 ## User Stories
 Go to ./public/GA_Project3 - User stories.docx of this repository folder.
 
+## General Approach to Challenges
+- Break down a function into a very simple function (i.e. logging out a string on the console) and incrementally build towards the main function.
+
 ## Unsolved Problems
 - Display marks on staff's calender to indicate the dates where he/she is assigned an operation
 - Prevent double booking of staffs on the same date and time
