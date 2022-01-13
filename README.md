@@ -25,9 +25,16 @@ Chief surgeons, also known as supercreators, have full CRUD capabilities that al
 Staffs can only view operations assigned to them and update post operation reports
 ![Assignment Page1](./public/surgeon-page.png)
 
+## Unsolved Problems
+Display marks on staff's calender to indicate the dates where he/she is assigned an operation
+
+## Stretch Goals
+- Chat feature that would allow communication within the operation team
+
 ## Backend
 The backend files can be found in this [repository](https://github.com/yihuitham/GA-Project3-BackEnd)
 
 ### Attributions
-[www.flaticon.com](www.flaticon.com)
+[https://flat-icons.com](https://flat-icons.com)
+
 [https://storyset.com](https://storyset.com/team)
