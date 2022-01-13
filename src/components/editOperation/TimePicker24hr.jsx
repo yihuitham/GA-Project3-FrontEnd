@@ -22,7 +22,7 @@ export default function TimePicker24hr({ setSelectedTime, date, time }) {
         mask='__:__'
         value={value}
         onChange={(newValue) => {
-          if (newValue === 'Invalid Date') {
+          if (newValue == 'Invalid Date') {
             console.log('wrong format');
           } else {
             const newTime = format(new Date(newValue), 'hh:mm');

@@ -116,7 +116,7 @@ export default function EditOperation({
                   inputProps={{ style: { fontSize: '0.875rem' } }}
                   size='small'
                   variant='standard'
-                  value={data.operation}
+                  defaultValue={data.operation}
                   sx={{ width: 350 }}
                   onChange={(e) => {
                     setOperationName(e.target.value);

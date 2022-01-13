@@ -23,7 +23,7 @@ export default function StaffAppBar() {
   const role = authState.userInfo.role;
   let title;
   switch (role) {
-    case 'Doctor':
+    case 'Surgeon':
       title = 'Dr.';
       break;
     case 'Nurse':
