@@ -30,9 +30,11 @@ Go to ./public/GA_Project3 - User stories.docx of this repository folder.
 
 ## Unsolved Problems
 - Display marks on staff's calender to indicate the dates where he/she is assigned an operation
+- Prevent double booking of staffs on the same date and time
 
 ## Stretch Goals
 - Chat feature that would allow communication within the operation team
+- To breakdown operation schedules in terms of timeslots
 
 ## Backend
 The backend files can be found in this [repository](https://github.com/yihuitham/GA-Project3-BackEnd)
