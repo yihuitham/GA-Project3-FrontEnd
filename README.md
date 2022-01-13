@@ -2,9 +2,7 @@
 
 # Hospital Management Application
 
-## Website
-
-[Hospital Management](https://hospital-management-fe.herokuapp.com/)
+### Website:[Hospital Management](https://hospital-management-fe.herokuapp.com/)
 
 ## Description
 
