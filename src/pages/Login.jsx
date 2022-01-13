@@ -45,7 +45,7 @@ export default function Login() {
   const [loginSuccess, setLoginSuccess] = useState();
   const [loginError, setLoginError] = useState();
   const [redirectOnLogin, setRedirectOnLogin] = useState(false);
-  const setLoginLoading = false;
+  const [loginLoading, setLoginLoading] = useState(false);
 
   const submitCredentials = async (credentials) => {
     try {
