@@ -27,6 +27,10 @@ Chief surgeons, also known as supercreators, have full CRUD capabilities that al
 Staffs can only view operations assigned to them and update post operation reports
 ![Assignment Page1](./public/surgeon-page.png)
 
+## User Stories
+
+Go to ./public/GA_Project3 - User stories.docx of this repository folder.
+
 ## Database/Storage
 
 - **MongoDB**, a NoSQL databased used for high volume data storage
@@ -51,10 +55,6 @@ The backend files can be found in this [repository](https://github.com/yihuitham
 - **jsonwebtoken** is a compact, URL-safe means of representing claims to be transferred between two parties.
 - **jwt-decode** is a small browser library that helps decoding the encoded JWTs token.
 - **mongoose** provides a straight-forward, schema-based solution to model the application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box.
-
-## User Stories
-
-Go to ./public/GA_Project3 - User stories.docx of this repository folder.
 
 ## Accomplishment
 
