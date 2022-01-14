@@ -6,8 +6,8 @@
 
 **Team members:**
 
-- ![Peng Kien Wei](https://github.com/kienwei96)
-- ![Tham Yi Hui](https://github.com/yihuitham)
+- [Peng Kien Wei](https://github.com/kienwei96)
+- [Tham Yi Hui](https://github.com/yihuitham)
 
 ## Description
 
