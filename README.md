@@ -45,7 +45,7 @@ Go to ./public/GA_Project3 - User stories.docx of this repository folder.
 - **axios**, a promised-based HTTP client for node.js and the browser.
 - **react**, a Javascript library for building user interfaces.
 - **material-ui**, a library that allows us to import and use different components to create a userinterface in React Applications.
-- **formik**, open source library for React, used as form help for validation.
+- **formik**, open source library for React, used as form helper for validation.
 - **date-fns**, a modern JavaScript date utility library.
 
 ### Backend
