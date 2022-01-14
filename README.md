@@ -4,7 +4,10 @@
 
 **Website: [Hospital Management](https://hospital-management-fe.herokuapp.com/)**
 
-**Team members: Kien Wei, Yi Hui**
+**Team members:**
+
+- ![Peng Kien Wei](https://github.com/kienwei96)
+- ![Tham Yi Hui](https://github.com/yihuitham)
 
 ## Description
 
