@@ -62,7 +62,7 @@ The backend files can be found in this [repository](https://github.com/yihuitham
 ## Accomplishment
 
 - Authentication and authorization implemented using JWT and headers
-- Full CRUD control over patient, staff and operation data for Chief user.
+- Full CRUD control over patient, staff and operation data for Chief(admin) user.
 - Staff able to view operation data and edit report
 
 ## General Approach to Challenges
