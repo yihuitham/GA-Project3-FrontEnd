@@ -32,7 +32,7 @@ Staffs can only view operations assigned to them and update post operation repor
 
 ## User Stories
 
-Click on this [link] (https://github.com/yihuitham/GA-Project3-FrontEnd/blob/main/public/GA_Project3%20-%20User%20stories.docx)
+Click on this [link](https://github.com/yihuitham/GA-Project3-FrontEnd/blob/main/public/GA_Project3%20-%20User%20stories.docx)
 
 ## Database/Storage
 
