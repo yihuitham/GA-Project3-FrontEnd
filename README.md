@@ -2,7 +2,7 @@
 
 ## Hospital Management Application
 
-##Technical Requirements
+## Technical Requirements
 
 - Use MongoDB, Express, React and Node
 - Have at least 2 related models (with references) and an additional user model with authentication. There should be at least 2 types of users.
