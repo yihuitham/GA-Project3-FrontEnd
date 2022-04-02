@@ -12,9 +12,9 @@
 - (Recommended) User stories that apply to the functionality of your app, crafted as a team.
 - (Recommended) Wireframes for the views you planned to create
 
-**Website: [Hospital Management](https://hospital-management-fe.herokuapp.com/)**
+## Website: [Hospital Management](https://hospital-management-fe.herokuapp.com/)
 
-**Team members:**
+## Team members:
 
 - [Peng Kien Wei](https://github.com/kienwei96)
 - [Tham Yi Hui](https://github.com/yihuitham)
