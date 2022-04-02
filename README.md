@@ -2,6 +2,18 @@
 
 ## Hospital Management Application
 
+##Technical Requirements
+
+- Use MongoDB, Express, React and Node
+- Have at least 2 related models (with references) and an additional user model with authentication. There should be at least 2 types of users.
+- Include all major CRUD functions for at least one of the models
+- Manage team contributions and collaboration by using standard Git flow on Github.
+- Nicely styled front-end with clean & well-formatted CSS, with or without a framework.
+- Deploy your application online, so that it is publicly accessible
+- Use some sort of daily tracker that all group members use to help organize your workflow (e.g. Trello).
+- (Recommended) User stories that apply to the functionality of your app, crafted as a team.
+- (Recommended) Wireframes for the views you planned to create
+
 **Website: [Hospital Management](https://hospital-management-fe.herokuapp.com/)**
 
 **Team members:**
