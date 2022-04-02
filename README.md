@@ -1,6 +1,4 @@
-# GA Project 3 - MERN Stack
-
-## Hospital Management Application
+# GA Project 3 - Hospital Management Application
 
 ## Technical Requirements
 
