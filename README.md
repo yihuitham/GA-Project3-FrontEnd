@@ -79,10 +79,13 @@ The backend files can be found in this [repository](https://github.com/yihuitham
 
 - Break down a function into a very simple function (i.e. logging out a string on the console) and incrementally build towards the main function.
 
-## Stretch Goals
+## Unsolved Problems
 
 - Display marks on staff's calender to indicate the dates where he/she is assigned an operation
 - Prevent double booking of staffs on the same date and time
+
+## Stretch Goals
+
 - Chat feature that would allow communication within the operation team
 - To breakdown operation schedules in terms of timeslots
 
